@@ -1,0 +1,41 @@
+body{
+    background: #262a23;
+}
+
+.navbar-default {
+  background-color: #212F1E;
+  border-color: #385432;
+}
+
+.modal-footer button{
+    color: #4F4F51;
+}
+
+.modal-footer button:hover{
+    color: #c1c132;
+}
+
+.modal-header button{
+    color: #4F4F51;
+}
+
+.modal-header button:hover{
+    color: #c1c132;
+}
+
+.sidebar{
+    background-color: #3a3f38;
+    border-right: 1px solid #3A3A3A;
+}
+
+.btn-app:hover{
+    background: #c1c132;
+    color: #F5F5F5;/**/
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background-color: #45632e;
+  color: #555555;
+}
