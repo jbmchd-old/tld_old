@@ -1,0 +1,218 @@
+<?php
+echo $this->headLink(array('rel' => 'shortcut icon', 'href' => $this->basePath() . '/img/'))
+        ->prependStylesheet($this->basePath() . '/public/css/login.css');
+
+$message_login = '';
+if (isset($this->messageLogin)) {
+    $message_login = $this->messageLogin;
+}
+?>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <style>
+            #user, #pass {
+                text-transform: uppercase
+            }
+
+            a:link, a:hover, a:visited { color: #23527c; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+
+            <div id="login" style="margin: 0 auto">
+                <?php if ($this->sessao()->isLogged()) : ?>
+                    <span>Você está logado!</span>
+                <?php else : ?>     
+                    <form method="POST" id="form_login" action="/acesso/login">
+                        <fieldset class="clearfix">
+                            <p><span class="fa fa-user fa-2x"></span><input type="text" placeholder="Usuário" name="user" id="user" data-obrigatorio /></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                            <p><span class="fa fa-lock fa-2x"></span><input type="password" placeholder="Senha" name="pass" id="pass" data-obrigatorio /></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                            <p><input type="submit" class="btn btn-success" value="Entrar"></p>
+                        </fieldset>
+                    </form>
+                <?php endif; ?>
+            </div> <!-- end login -->
+        </div>
+
+        <?php if ($this->sessao()->isLogged()) : $acessos = $this->sessao()->getUserInfo()['acessos'] ?>
+            <form id="form_acessos">
+                <div class="modal fade" id="modal_acessos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 385px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" data-toggle="tooltip" data-placement="bottom" id="fecha_modal_acessos">
+                                    <i class="fa fa-sign-out fa-1x"></i>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel"> Escolha um acesso </h4>
+                            </div>
+                            <div class="modal-body clearfix no-padding">
+                                <div id="modal_acessos_alertas" class="label label-default col-lg-30 "></div>
+                                <div class="col-lg-30" style="margin-top: 5px" id="select-acesso">
+                                    <label>Aplicativo:</label>
+                                    <div class="form-inline form-group">
+                                        <div class="input-group col-lg-30">
+                                            <div style="width:40px" class="input-group-addon"><i class="fa fa-truck"></i></div>
+                                            <select class="form-control" id="acesso" name="acesso">
+                                                <option value="0">Selecione...</option>
+                                                <?php foreach ($acessos as $aplicativos) : $nome = $aplicativos['nome']; ?>
+                                                    <?php foreach ($aplicativos['unidades'] as $unidade) : ?>
+                                                        <option data-unidade="<?= $unidade['cod_unidade'] ?>" value="<?= $aplicativos['cod_aplicativo'] ?>"><?= ucfirst($nome . ' - ' . $unidade['nome_unidade']) ?></option>
+                                                    <?php endforeach; ?>
+                                                <?php endforeach; ?>
+                                            </select>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-30" id="auth-etapas-codigo">
+                                    <div class="col-lg-30">
+                                        <i class="fa fa-arrow-circle-left cursor-pointer" id="auth-etapas-voltar"></i>
+                                    </div>
+                                    <label>Código:</label>
+                                    <br />
+                                    <sup style="font-size: 10px">(Foi enviado um código de confirmação para seu Fuselo, digite-o abaixo)</sup>
+                                    <div class="col-lg-30">
+                                        
+                                        <div class="input-group col-lg-17" style="float: left" >
+                                            <div style="width:40px" class="input-group-addon"><i class="fa fa-lock"></i></div>
+                                            <input type="text" name="token" class="form-control" placeholder="Código de confirmação" />
+                                        </div>
+                                        <div class="col-lg-13" style="font-size: 10px" id="auth-etapas-tempo">Expira em:</div>
+                                        
+                                    </div>
+                                    
+                                    <div class="col-lg-30">
+                                        <a href="#" id="auth-etapas-gerar-token" style="font-size: 10px; clear: both">Gerar outro código</a>                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">  
+                                <button type="button" class="text-center" data-toggle="tooltip" data-placement="bottom" id="confirm_modal_acessos">
+                                    <i class="fa fa-check fa-1x"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        <?php endif; ?>
+    </body>
+
+    <script>
+
+        var $message_login = '<?= $message_login ?>';
+        
+        if ($message_login.trim().length > 0) {
+            $().alert($message_login);
+        }
+        
+//        function exibeAcessos() {
+//            $('#select-acesso').show();
+//            $('#auth-etapas-codigo').hide();
+//        }
+
+        function registraAcessoSelecionado(){
+            
+            $.ajax({
+                url: '/acesso/authenticate/registraUnidadeIdentificadorSessaoAjax',
+                data: {
+                    cod_aplicativo_selecionado: cod_aplicativo_selecionado,
+                    cod_unidade_selecionada: cod_unidade_selecionada,
+                }
+            }).done(function (result) {
+                if (result.hasOwnProperty('aplicativo_selecionado')) {
+                    result = result.aplicativo_selecionado;
+                }
+
+                if (result.hasOwnProperty('nome_aplicativo')) {
+                    $().loading(true);
+                    window.location.href = '/' + result.nome_aplicativo;
+                } else {
+                    $().alert('Ocorreu algum problema, verifique.')
+                }
+            });
+        }
+        
+//        function validaAcesso(){
+//            if($('#auth-etapas-codigo').is(':visible')){
+//                $.ajax({
+//                    url: '/acesso/authenticate/validaTokenAjax',
+//                    data: {
+//                        token: $('input[name=token]').val(),
+//                        cod_usuario_aplicativo_unidade: cod_usuario_aplicativo_unidade,
+//                        time_limite: time_limite
+//                    }
+//                }).done(function (result){
+//
+//                    if( ! result.acesso_liberado){
+//                        $('#modal_acessos_alertas').showMessageTarge({
+//                            message: 'Código inválido/expirado.',
+//                            type: 'warning'
+//                        });
+//                        
+//                        return false;
+//                    } 
+//                    registraAcessoSelecionado();
+//                });
+//
+//            } else {
+//                cod_aplicativo_selecionado = $('#acesso option:selected').val();
+//                cod_unidade_selecionada = $('#acesso option:selected').attr('data-unidade');
+//
+//                if (cod_aplicativo_selecionado !== '0') {
+//
+//                    var auth_etapas = session_user_acessos[cod_aplicativo_selecionado]['unidades'][cod_unidade_selecionada]['autenticacao_duas_etapas'];
+//                    var acesso_autenticado = (session_user_acessos[cod_aplicativo_selecionado].acesso_autenticado)?true:false;
+//
+//                    if (auth_etapas === 'S' && !acesso_autenticado) {
+//                        gerarCodigoAutenticacao(cod_aplicativo_selecionado, cod_unidade_selecionada);
+//                        segundos=time_limite;
+//                        contagem_tempo();
+//                    } else {
+//                        
+//                    }
+//
+//                } else {
+//                    $('#modal_acessos_alertas').showMessageTarge({
+//                        message: 'Selecione um acesso',
+//                        type: 'danger'
+//                    });
+//                    return false;
+//                }
+//            }
+//
+//        }
+        
+        var modal = $('#modal_acessos');
+        
+//        if (modal.length) {
+//
+//            $('#fecha_modal_acessos').click(function () {
+//                window.location.href = '/acesso/logout';
+//            });
+//
+//            $('#confirm_modal_acessos').click(function () {
+//                validaAcesso();
+//            });
+//
+//            modal.modal({
+//                backdrop: 'static',
+//                keyboard: false
+//            });
+//        }
+        
+//        exibeAcessos();
+        
+//        $('#form_acessos').submit(function (){validaAcesso();return false;})
+    </script>
+
+</html>

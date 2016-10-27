@@ -1,0 +1,93 @@
+<?php
+echo $this->headLink(array('rel' => 'shortcut icon', 'href' => ''))
+        ->prependStylesheet($this->basePath() . 'public/css/aplicacao/index.css');
+
+echo $this->headScript()
+        ->prependFile($this->basePath() . 'public/js/aplicacao/index.js');
+
+$this->headMeta()->appendName('keywords', 'Sistema, Agendas');
+?>
+<!-- Cabeçalho -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" rel="home" href="#" title="Buy Sell Rent Everyting">
+                <div style="color: #FF9900" >TL - Diesel</div>
+            </a>                    
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a style="color:#FF9900" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="fa fa-gear"></span> Cadastros <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" class="open-app" data-title="Pessoas"><i class="fa fa-user"></i> Pessoas</a></li>                             
+                        <li><a href="#" class="open-app" data-title="Veiculos"><i class="fa fa-car"></i> Veículos</a></li>                             
+                        <li><a href="#" class="open-app" data-title="Estoque"><i class="fa fa-shopping-cart"></i> Estoque</a></li>                             
+                    </ul>
+                </li>
+            </ul>
+            
+            
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- // Cabeçalho -->
+
+<div style="padding-top:51px; height: 100%" class="container-fluid no-padding">
+
+    <!-- Sidebar -->
+
+<!--    <div class="col-lg-2 sidebar text-center" style="height: 100%">
+        <ul class="nav nav-sidebar" style="">
+            <li>
+                <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Romaneio de Conferência de Rota" title="Romaneio de Conferência de Rota">
+                    <i class="fa fa-money fa-2x"></i>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Lançamento de NF" title="Lançamento de NF">
+                    <i class="fa fa-wrench fa-2x"></i>
+                </button>
+            </li>
+            
+            
+        </ul>
+    </div>-->
+    
+    <!-- // Sidebar -->
+
+    <!-- Corpo -->
+    <?php echo $this->partial('telas/pessoas', ['variaveis'=>$this->telas]) ?>
+   
+</div>
+<script>
+    $(function (){
+        
+        $('a.open-app[data-title=Pessoas]').click();
+        
+//        $dpc().mudaTituloPagina('SIME - Sistema de Monitoramento de Entrega')
+        
+//        $('.janela[data-title="Pessoas"]').show();
+//        $('.janela[data-title="Lançamento de NF"]').show();
+//        $('.janela[data-title="Cancelamento de Lançamento"]').show();
+//        $('.janela[data-title="Lançamento de Carregamento"]').show();
+//        $('.janela[data-title="Retorno de NF"]').show();
+//        $('.janela[data-title="Reimpressão de Documentos"]').show();
+//        $('.janela[data-title="Consulta de NF"]').show();
+//        $('.janela[data-title="Cadastro de situação"]').show();
+//        $('.janela[data-title="Romaneio de Conferência de Rota"]').show();
+//        $('.janela').show();
+    });
+</script>
