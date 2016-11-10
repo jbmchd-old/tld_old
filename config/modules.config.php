@@ -28,6 +28,6 @@ return [
     'Zf3Session',
     'Zf3Authentication',
     'Acesso',
+    'Pessoas',
     'Aplicacao\Index',
-    'Aplicacao\Pessoas',
 ];

@@ -32,8 +32,8 @@
     "autoload": {
         "psr-4": {
             "Acesso\\": "module/Acesso/src/",
-            "Aplicacao\\Index\\": "module/Aplicacao/Index/src/",
-            "Aplicacao\\Pessoas\\": "module/Aplicacao/Pessoas/src/"
+            "Pessoas\\": "module/Pessoas/src/",
+            "Aplicacao\\Index\\": "module/Aplicacao/Index/src/"
         }
     },
     "autoload-dev": {
