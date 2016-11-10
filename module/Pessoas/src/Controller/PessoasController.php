@@ -12,7 +12,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zf3ServiceBase\Controller\GenericController;
 
-class IndexController extends GenericController {
+class PessoasController extends GenericController {
 
     public function __construct($sm) {
         parent::__construct($sm, __NAMESPACE__);

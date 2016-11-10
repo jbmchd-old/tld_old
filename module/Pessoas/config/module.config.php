@@ -18,7 +18,7 @@ return [
                 'options' => [
                     'route'    => '/pessoas',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => Controller\PessoasController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -28,7 +28,7 @@ return [
                 'options' => [
                     'route'    => '/pessoas[/:action]',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => Controller\PessoasController::class,
                         'action'     => 'index',
                     ],
                 ],

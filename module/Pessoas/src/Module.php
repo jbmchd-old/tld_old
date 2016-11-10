@@ -19,8 +19,8 @@ class Module
     public function getControllerConfig() {
         return [ 
             'factories' => [
-                Controller\IndexController::class => function( $sm ) {
-                    return new Controller\IndexController($sm);
+                Controller\PessoasController::class => function( $sm ) {
+                    return new Controller\PessoasController($sm);
                 },
             ]
         ];
