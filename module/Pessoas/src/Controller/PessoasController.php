@@ -86,7 +86,7 @@ class PessoasController extends GenericController {
             return false;
         }
         $dados = $request->getPost()->toArray();
-        $srv_pes = $this->app()->getEntity('VPessoas');
+        $srv_pes = $this->app()->getEntity('Pessoas');
         $pessoa = $srv_pes->getAllById($dados['id']);
         return new JsonModel($pessoa);
     }
