@@ -57,18 +57,6 @@ class PessoasController extends GenericController {
 
     }
 
-    public function buscaTiposDocumentosAction() {
-
-        $request = $this->getRequest();
-        if (!$request->isPost()) {
-            return false;
-        }
-
-        $srv_tipos_doc = $this->app()->getEntity('PessoasTipodocumento');
-        $tipos_doc = $srv_tipos_doc->getAll();
-        return new JsonModel($tipos_doc);
-    }
-
     public function buscaPessoasAction() {
         $request = $this->getRequest();
         if (!$request->isPost()) {
