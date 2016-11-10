@@ -179,8 +179,8 @@
         
     };
 
-    $.fn.loading = function (option, diferenciador) {
-        diferenciador = (typeof diferenciador === 'undefined')?'':'_'+diferenciador.split('?').shift();
+    $.fn.loading = function (option, $this) {
+        var diferenciador = (typeof $this.url === 'undefined')?'':$this.url.split('/').join('_').split('?').shift();
         
         var param_tipo = typeof option;
         var titulo = 'Aguarde...';
@@ -256,12 +256,16 @@
         $(destino)
                 .html(settings.message)
                 .removeClass()
-                .addClass('col-lg-30 label label-'+settings.type)
+                .addClass('col-lg-12 label label-'+settings.type)
                 .slideDown("slow", function(){
                     setTimeout(function(){ 
                        $(destino).hide();
                     }, 5000);
                 });
+                
+        if (settings.type=='warning'){
+            $(destino).css({color:'#000'})
+    }
     }
     
     function reposicionaModal (seletor, id_modal, modal){

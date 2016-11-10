@@ -10,7 +10,7 @@ function main() {
         //abre as janelas ao clicar no icone
         $('.btn-app, .open-app').click(function (){
             var nome_janela = $(this).attr('data-title').trim();
-            $('.janela, .open-app').filter('div[data-title="'+nome_janela+'"]').show();
+            $('.janela').filter('div[data-title="'+nome_janela+'"]').show();
         });
 
         //ativa janelas arrastaveis

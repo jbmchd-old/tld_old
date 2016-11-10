@@ -5,29 +5,28 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Aplicacao\Index;
+namespace Pessoas;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
-//use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
         'routes' => [
-            'home' => [
+            'pessoas_home' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route'    => '/',
+                    'route'    => '/pessoas',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
                     ],
                 ],
             ],
-            'application' => [
+            'pessoas' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/application[/:action]',
+                    'route'    => '/pessoas[/:action]',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
@@ -43,13 +42,13 @@ return [
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => [
-            'layout/layout'     => __DIR__ . '/../view/layout/padrao.phtml',
-            'base/index/index'  => __DIR__ . '/../view/base/index/index.phtml',
-            'error/404'         => __DIR__ . '/../view/error/404.phtml',
-            'error/index'       => __DIR__ . '/../view/error/index.phtml',
+            'telas/pessoas'     => __DIR__ . '/../view/pessoas/telas/pessoas.phtml'
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
+        'strategies' => array(
+            'ViewJsonStrategy',
+        ),
     ],
 ];

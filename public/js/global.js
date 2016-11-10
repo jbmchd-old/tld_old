@@ -12,8 +12,8 @@ function main() {
         $.ajaxSetup({
             dataType: 'json',
             type: 'POST',
-            beforeSend: function ()     { var url = this.url.split('/').join('_'); $().loading(true, url); },
-            complete:   function ()     { var url = this.url.split('/').join('_'); $().loading(false, url); },
+            beforeSend: function ()     { $().loading(true, this);  },
+            complete:   function ()     { $().loading(false, this); },
             error:      function (error){ console.log(error); },
         });
         

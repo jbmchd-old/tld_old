@@ -6,8 +6,8 @@
     "@gray": "lighten(@gray-base, 33.5%)",
     "@gray-light": "lighten(@gray-base, 46.7%)",
     "@gray-lighter": "lighten(@gray-base, 93.5%)",
-    "@brand-primary": "#FFE8CF",
-    "@brand-success": "#FF9900",
+    "@brand-primary": "#FF9900",
+    "@brand-success": "#5cb85c",
     "@brand-info": "#5bc0de",
     "@brand-warning": "#f0ad4e",
     "@brand-danger": "#d9534f",
@@ -29,7 +29,7 @@
     "@font-size-h4": "ceil((@font-size-base * 1.25))",
     "@font-size-h5": "@font-size-base",
     "@font-size-h6": "ceil((@font-size-base * 0.85))",
-    "@line-height-base": "1",
+    "@line-height-base": "1.2",
     "@line-height-computed": "floor((@font-size-base * @line-height-base))",
     "@headings-font-family": "inherit",
     "@headings-font-weight": "500",
@@ -97,7 +97,7 @@
     "@input-height-base": "(@line-height-computed + (@padding-base-vertical * 2) + 2)",
     "@input-height-large": "(ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2)",
     "@input-height-small": "(floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2)",
-    "@form-group-margin-bottom": "15px",
+    "@form-group-margin-bottom": "5px",
     "@legend-color": "@gray-dark",
     "@legend-border-color": "#e5e5e5",
     "@input-group-addon-bg": "@gray-lighter",
@@ -131,7 +131,7 @@
     "@screen-sm-max": "(@screen-md-min - 1)",
     "@screen-md-max": "(@screen-lg-min - 1)",
     "@grid-columns": "12",
-    "@grid-gutter-width": "20px",
+    "@grid-gutter-width": "10px",
     "@grid-float-breakpoint": "@screen-sm-min",
     "@grid-float-breakpoint-max": "(@grid-float-breakpoint - 1)",
     "@container-tablet": "(720px + @grid-gutter-width)",
@@ -431,5 +431,5 @@
     "scrollspy.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=30b29e099b0762b48bc28cfe11176f9e"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=f6af811ecdd2737bc62e1ab7ee710584"
 }
