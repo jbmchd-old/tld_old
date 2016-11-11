@@ -81,7 +81,7 @@ $(function () {
         $('#pes_select').val(0).change();
     });
 
-    $('form').submit(function () {
+    $('#pessoas_form').submit(function () {
         
         if (!tudo_ok && ($('input[name=fone1]').val().trim() == "" && $('input[name=fone2]').val().trim() == "")) {
             $('#pessoas_alertas').showMessageTarge({

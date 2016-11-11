@@ -26,27 +26,23 @@ class PessoasController extends GenericController {
             return false;
         }
 
-        $dados_pes = $request->getPost()->toArray();
+        $dados = $request->getPost()->toArray();
 
-        $dados_pes['nrodocumento'] = preg_replace('/[^0-9]/', '', $dados_pes['nrodocumento']);
-
-        $dados_pes['dtanascimento'] = implode('-', array_reverse(explode('/', $dados_pes['dtanascimento'])));
-
-        $dados_pes['fone1'] = preg_replace('/[^0-9]/', '', $dados_pes['fone1']);
-        $dados_pes['fone2'] = preg_replace('/[^0-9]/', '', $dados_pes['fone2']);
-
-        $dados_pes['status'] = ($dados_pes['status'] == true) ? 'A' : 'I';
-
+        $dados['nrodocumento'] = preg_replace('/[^0-9]/', '', $dados['nrodocumento']);
+        $dados['dtanascimento'] = implode('-', array_reverse(explode('/', $dados['dtanascimento'])));
+        $dados['fone1'] = preg_replace('/[^0-9]/', '', $dados['fone1']);
+        $dados['fone2'] = preg_replace('/[^0-9]/', '', $dados['fone2']);
+        $dados['status'] = ($dados['status'] == true) ? 'A' : 'I';
         
-        if($dados_pes['id']>0){
-            $dados_pes['dtaultimaalteracao'] = (new \DateTime())->format('Y-m-d H:m:i');
+        if($dados['id']>0){
+            $dados['dtaalteracao'] = (new \DateTime())->format('Y-m-d H:m:i');
         } else {
-            $dados_pes['dtacadastro'] = (new \DateTime())->format('Y-m-d H:m:i');
+            $dados['dtainclusao'] = (new \DateTime())->format('Y-m-d H:m:i');
         }
         
         try {
             $srv_pessoas = $this->app()->getEntity('Pessoas');
-            $entity = $srv_pessoas->create($dados_pes);
+            $entity = $srv_pessoas->create($dados);
             $result = $srv_pessoas->save($entity);
             
             return new JsonModel($result->toArray());
