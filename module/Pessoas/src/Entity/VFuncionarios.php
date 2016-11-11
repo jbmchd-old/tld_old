@@ -4,7 +4,7 @@ namespace Pessoas\Entity;
 
 use ZeDb\Entity;
 
-class VPessoas extends Entity {
+class VFuncionarios extends Entity {
     
     public function __call($name, $arguments) {
         $attr = lcfirst(substr($name, 3));

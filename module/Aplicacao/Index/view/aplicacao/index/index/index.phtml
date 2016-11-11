@@ -32,6 +32,7 @@ $this->headMeta()->appendName('keywords', 'Sistema, Agendas');
                         <span class="fa fa-gear"></span> Cadastros <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#" class="open-app" data-title="Pessoas"><i class="fa fa-user"></i> Pessoas</a></li>                             
+                        <li><a href="#" class="open-app" data-title="Funcionarios"><i class="fa fa-address-card"></i> Funcionários</a></li>                             
                         <li><a href="#" class="open-app" data-title="Veiculos"><i class="fa fa-car"></i> Veículos</a></li>                             
                         <li><a href="#" class="open-app" data-title="Estoque"><i class="fa fa-shopping-cart"></i> Estoque</a></li>                             
                     </ul>
@@ -49,5 +50,6 @@ $this->headMeta()->appendName('keywords', 'Sistema, Agendas');
 
     <!-- Corpo -->
     <?php echo $this->partial('telas/pessoas', ['variaveis'=>$this->telas]) ?>
+    <?php echo $this->partial('telas/funcionarios', ['variaveis'=>$this->telas]) ?>
    
 </div>

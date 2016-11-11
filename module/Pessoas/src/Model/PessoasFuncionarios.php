@@ -8,6 +8,6 @@ class PessoasFuncionarios extends Model {
     
     public function __construct($options = null) {
         $this->tableName = __CLASS__;
-        parent::__construct('pessoas_id', $options);
+        parent::__construct('id', $options);
     }
 }

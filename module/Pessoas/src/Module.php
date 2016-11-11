@@ -22,6 +22,9 @@ class Module
                 Controller\PessoasController::class => function( $sm ) {
                     return new Controller\PessoasController($sm);
                 },
+                Controller\FuncionariosController::class => function( $sm ) {
+                    return new Controller\FuncionariosController($sm);
+                },
             ]
         ];
     }

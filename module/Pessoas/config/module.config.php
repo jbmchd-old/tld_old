@@ -33,6 +33,16 @@ return [
                     ],
                 ],
             ],
+            'funcionarios' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/funcionarios[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\FuncionariosController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'view_manager' => [
@@ -42,7 +52,8 @@ return [
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => [
-            'telas/pessoas'     => __DIR__ . '/../view/pessoas/telas/pessoas.phtml'
+            'telas/pessoas'     => __DIR__ . '/../view/pessoas/telas/pessoas.phtml',
+            'telas/funcionarios'     => __DIR__ . '/../view/pessoas/telas/funcionarios.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
