@@ -243,7 +243,7 @@
             return false;
         }
         
-        if(typeof options!=='object' || options.message.trim()=='' || options.type.trim()=='' ){
+        if(typeof options!=='object' || !options.hasOwnProperty('type') ){
             console.log('Erro com alguns dos parametros verifique');
             return false;
         }
@@ -253,17 +253,37 @@
             type:''
         }, options);
         
+        if(settings.message.trim() == ''){
+            switch (settings.type){
+                case 'success':
+                    settings.message = 'Operação realizada com sucesso.';
+                    break;
+                case 'warning':
+                    settings.message = 'Alguma coisa não está certa, verifique.';
+                    break;
+                case 'erro':
+                    settings.message = 'Algum erro aconteceu, verifique.';
+                    break;
+                default : 
+                    console.log('Tipo de alerta inexistente, verifique.'); 
+                    return false;
+            }
+            
+        }
+        
+        
         $(destino)
                 .html(settings.message)
                 .removeClass()
                 .addClass('col-lg-12 label label-'+settings.type)
+                .attr('style','margin-bottom:5px;')
                 .slideDown("slow", function(){
                     setTimeout(function(){ 
                        $(destino).hide();
                     }, 5000);
                 });
                 
-        if (settings.type=='warning'){
+        if (settings.type=='warning' || settings.type=='success'){
             $(destino).css({color:'#000'})
     }
     }
