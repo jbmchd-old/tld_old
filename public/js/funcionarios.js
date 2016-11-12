@@ -72,7 +72,7 @@ $(function () {
     
     $('#func_select').change(function () {
         var id = $(this).val();
-        $('#func_ult_lanc tbody').html();
+        $('#func_ult_lanc tbody').html('');
         if (id > 0) {
             buscaFuncionario(id);
         } else {
