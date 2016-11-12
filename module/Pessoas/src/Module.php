@@ -25,6 +25,9 @@ class Module
                 Controller\FuncionariosController::class => function( $sm ) {
                     return new Controller\FuncionariosController($sm);
                 },
+                Controller\VeiculosController::class => function( $sm ) {
+                    return new Controller\VeiculosController($sm);
+                },
             ]
         ];
     }

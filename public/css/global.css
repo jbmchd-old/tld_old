@@ -5,3 +5,5 @@
 .with-border {border: 1px solid;}
 .clear {clear:both}
 .float-right {float: right}
+
+legend { margin-bottom: 5px; }
