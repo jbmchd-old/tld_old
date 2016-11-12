@@ -1,8 +1,6 @@
 
 $(function () {
 
-    buscaFuncionarios();
-
     function buscaFuncionarios() {
         $.ajax({
             url: "/funcionarios/buscaFuncionarios",
