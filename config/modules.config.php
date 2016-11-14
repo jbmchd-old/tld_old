@@ -30,4 +30,5 @@ return [
     'Acesso',
     'Pessoas',
     'Aplicacao\Index',
+    'Aplicacao\Produtos',
 ];
