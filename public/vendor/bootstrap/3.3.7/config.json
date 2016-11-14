@@ -253,7 +253,7 @@
     "@label-danger-bg": "@brand-danger",
     "@label-color": "#fff",
     "@label-link-hover-color": "#fff",
-    "@modal-inner-padding": "15px",
+    "@modal-inner-padding": "5px",
     "@modal-title-padding": "10px",
     "@modal-title-line-height": "@line-height-base",
     "@modal-content-bg": "#fff",
@@ -431,5 +431,5 @@
     "scrollspy.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=06fe17366a54b7e6b76231434e1d513c"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=9495b2a33c8cc180e5abb56afc23b56e"
 }
