@@ -18,7 +18,7 @@ return [
                 'options' => [
                     'route'    => '/produtos',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => Controller\ProdutosController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -28,7 +28,7 @@ return [
                 'options' => [
                     'route'    => '/produtos[/:action]',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => Controller\ProdutosController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -41,7 +41,9 @@ return [
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
-        'template_map' => [],
+        'template_map' => [
+            'telas/aplicacao/produtos'        => __DIR__ . '/../view/aplicacao/produtos/telas/produtos.phtml',
+        ],
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
