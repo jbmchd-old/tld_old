@@ -22,7 +22,7 @@ class ProdutosController extends GenericController
             return false;
         }
 
-        $srv = $this->app()->getEntity('Pessoas','VMarcas');
+        $srv = $this->app()->getEntity('Pessoas','VVeicMarcas');
         $result = $srv->getAll();
         return new JsonModel($result);
     }

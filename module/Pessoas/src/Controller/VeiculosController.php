@@ -41,7 +41,7 @@ class VeiculosController extends GenericController {
         $request = $this->getRequest();
         if (!$request->isPost()) { return false; }
 
-        $srv = $this->app()->getEntity('VMarcas');
+        $srv = $this->app()->getEntity('VVeicMarcas');
         $result = $srv->getAll();
         return new JsonModel($result);
     }
@@ -74,17 +74,6 @@ class VeiculosController extends GenericController {
         $srv = $this->app()->getEntity('VVeiculos');
         $veic = $srv->getAllByPessoasId($dados['pessoas_id']);
         return new JsonModel($veic);
-    }
-    
-    public function buscaVeiculoAction() {
-        $request = $this->getRequest();
-        if (!$request->isPost()) {
-            return false;
-        }
-        $dados = $request->getPost()->toArray();
-        $srv_pes = $this->app()->getEntity('PessoasVeiculos');
-        $pessoa = $srv_pes->getAllById($dados['id']);
-        return new JsonModel($pessoa);
     }
     
     public function salvarAction() {
