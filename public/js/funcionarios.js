@@ -24,9 +24,10 @@ $(function () {
             table.html('');
             $(result).each(function (i, cada) {
                 table
-                        .append('<tr data-id="'+cada.id+'"><td>' + cada.cargo + '</td><td>' + cada.salario + '</td><td>' + cada.obs + '</td><td style="text-align: center"><button type="button" ><i class="fa fa-edit"></i></button></td></tr>');
+                    .append('<tr data-id="'+cada.id+'"><td>' + cada.cargo + '</td><td data-tipo="currency">' + cada.salario + '</td><td>' + cada.obs + '</td><td style="text-align: center"><button type="button" ><i class="fa fa-edit"></i></button></td></tr>');
 
-            })
+            });
+            $('.table').formatacao().tabela();
         });
     }
 
@@ -94,6 +95,8 @@ $(function () {
         $('#modal_func_cargo').val(cargo);
         $('#modal_func_salario').val(salario);
         $('#modal_func_obs').val(obs);
+
+        $form().atrelaEventosPorAtributos( $('#func_modal_form').find( campos_texto.join() ) );
 
         $('#func_alter_func').modal();
     });

@@ -86,6 +86,9 @@ class ProdutosController extends GenericController
             $dados['dtainclusao'] = (new \DateTime())->format('Y-m-d H:m:i');
         }
         
+        $dados['precocusto'] = trim(str_replace(',', '.', str_replace('.', '', str_replace('R$', '', $dados['precocusto']))));
+        $dados['precovenda'] = trim(str_replace(',', '.', str_replace('.', '', str_replace('R$', '', $dados['precovenda']))));
+        
         try {
             $srv_pessoas = $this->app()->getEntity('Produtos');
             $entity = $srv_pessoas->create($dados);

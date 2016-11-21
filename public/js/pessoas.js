@@ -53,16 +53,23 @@ $(function () {
         
     }
     
-    $("#pes_dta_nasc").datepicker();
+    $("#pes_dta_nasc").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
 
     $('#pes-doc_tipo').change(function () {
         $('input[name=nrodocumento]').val('');
 
         var tipo_slc = $(this).find('option:selected').html().toLowerCase();
-
         $('input[id^="pes_doc_num_"]').addClass('hide').removeAttr('name').removeAttr('data-obrigatorio');
-
         $('input[id=pes_doc_num_' + tipo_slc + ']').removeClass('hide').attr('name', 'nrodocumento').attr('data-obrigatorio', '');
+        
+        if(tipo_slc == 'cpf'){
+            $('#pes_dta_nasc').show().attr('data-obrigatorio','');
+        } else {
+            $('#pes_dta_nasc').hide().removeAttr('data-obrigatorio');
+        }
 
     });
 

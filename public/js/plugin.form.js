@@ -25,6 +25,24 @@ var $form = function (){
                 if(name === 'data-mask' && value){
                     $(campo).mask(value);
                 }
+                
+                if(name === 'data-tipo' && value){
+                    
+                    switch (value){
+                        case 'currency':
+                            $(campo).autoNumeric('init', { 
+                                aSep: '.',
+                                aDec: ',', 
+                                aSign: 'R$ '
+                            });
+                            
+                           var valor_atual = $(campo).autoNumeric('get');
+                           $(campo).autoNumeric('set', valor_atual);
+                        
+                            
+                    }
+                    
+                }
             });
         });
     };
@@ -74,10 +92,7 @@ var $form = function (){
             } else if(tag === 'SELECT' && parseInt($(campo).val()) === 0){
                 erro = 1;
                 msg = 'Este campo é obrigatório.';
-            } else if(tag !== 'SELECT' && campo.value.length === 1) {
-                msg = 'Poucos caracteres.';
-                erro = 1;
-            }
+            } 
 
             if(erro){
                 removeAvisoCampoObrigatorio(campo);

@@ -51,13 +51,13 @@ class FuncionariosController extends GenericController {
             $dados['dtainclusao'] = (new \DateTime())->format('Y-m-d H:m:i');
         }
         
-        $dados['salario'] = str_replace(',', '.', $dados['salario']);
+        $dados['salario'] = trim(str_replace(',', '.', str_replace('.', '', str_replace('R$', '', $dados['salario']))));
         
         try {
             $srv_pessoas = $this->app()->getEntity('PessoasFuncionarios');
             $entity = $srv_pessoas->create($dados);
             $result = $srv_pessoas->save($entity);
-            
+        
             return new JsonModel($result->toArray());
             
         } catch (\Exception $exc) {

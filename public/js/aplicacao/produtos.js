@@ -112,8 +112,10 @@ $(function () {
             table.html('');
             $(result).each(function (i, cada) {
                 table
-                    .append('<tr data-id="'+cada.id+'" data-marca_id="'+cada.marca_id+'" data-veic_marca_id="'+cada.veic_marca_id+'"><td>'+cada.veic_marca+'</td><td>'+cada.categoria+'</td><td>'+cada.descricao+'</td><td>'+cada.quantidade+'</td><td>'+cada.unidade+'</td><td>'+cada.espessura+'</td><td>'+cada.precocusto+'</td><td>'+cada.precovenda+'</td><td>'+cada.status+'</td><td>'+cada.obs+'</td><td style="text-align:center"><button type="button"><i class="fa fa-edit"></i></button></td></tr>');
+                    .append('<tr data-id="'+cada.id+'" data-marca_id="'+cada.marca_id+'" data-veic_marca_id="'+cada.veic_marca_id+'"><td>'+cada.veic_marca+'</td><td>'+cada.categoria+'</td><td>'+cada.descricao+'</td><td>'+cada.quantidade+'</td><td>'+cada.unidade+'</td><td>'+cada.espessura+'</td><td data-tipo="currency">'+cada.precocusto+'</td><td data-tipo="currency">'+cada.precovenda+'</td><td>'+cada.status+'</td><td>'+cada.obs+'</td><td style="text-align:center"><button type="button"><i class="fa fa-edit"></i></button></td></tr>');
             })
+            
+            $('.table').formatacao().tabela();
         });
     }
     
@@ -232,6 +234,8 @@ $(function () {
         $('#modal_prod_obs').val(obs);
         $('#modal_prod_status').prop('checked',(status=='A')?true:false);
 
+        $form().atrelaEventosPorAtributos( $('#prod_modal_form').find( campos_texto.join() ) );
+
         $('#prod_modal_prod').modal();
     });
     
@@ -268,11 +272,13 @@ $(function () {
 
     });
 
+// FIM - REFERENTE AO MODAL DE ALTERAR PRODUTOS
+
+    
     $('a.open-app[data-title=Produtos]').click(function () {
         buscaMarcas();
         buscaVeiculosMarcas();
         limpaCampos();
     });
     
-// FIM - REFERENTE AO MODAL DE ALTERAR PRODUTOS
 });

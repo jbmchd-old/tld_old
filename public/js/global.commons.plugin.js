@@ -227,7 +227,7 @@ function estaDefinido($var, com_conteudo){
                 $(tabela.selector).find('tbody td[data-tipo=currency]').autoNumeric('init', { 
                     aSep: '.',
                     aDec: ',', 
-                    aSign: ''
+                    aSign: 'R$ '
                 });
                 //Formata datas
                 $(tabela.selector).find('tbody td[data-tipo=date]').each(function(key, cada){

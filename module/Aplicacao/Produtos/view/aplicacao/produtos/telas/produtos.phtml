@@ -20,10 +20,10 @@
                     <fieldset>
                         <legend>Marca:</legend>
                         <div class="clearfix" style="margin: 7px 0;">
-                            <div class="col-lg-8" >
+                            <div class="col-lg-7" >
                                 <select id="prod_marca_select" class="form-control" name="marca_id" data-obrigatorio > <option>Selecione...</option> </select>
                             </div>
-                            <div class="col-lg-4 text-center" >
+                            <div class="col-lg-5 text-center" >
                                 <button type="button" id="prod_add_marca" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Marca</button>
                             </div>
                             
@@ -49,19 +49,24 @@
                         </div>
                         <div class="form-group col-lg-4">
                             <label>Unidade*</label>
-                            <input type="text" class="form-control" name="unidade" id="prod_unidade" data-obrigatorio />
+                            <select id="prod_unidade" class="form-control" name="unidade" data-obrigatorio > 
+                                <option value="">Selecione...</option> 
+                                <option value="UNID">UNIDADE</option> 
+                                <option value="METRO">METRO</option> 
+                                <option value="JOGO">JOGO</option> 
+                            </select>
                         </div>
                         <div class="form-group col-lg-4">
-                            <label>Espessura.*</label>
-                            <input type="text" class="form-control" name="espessura" id="prod_espessura" data-obrigatorio />
+                            <label>Espessura</label>
+                            <input type="text" class="form-control" name="espessura" id="prod_espessura" />
                         </div>
                         <div class="form-group col-lg-6">
                             <label>P. custo*</label>
-                            <input type="text" class="form-control" name="precocusto" id="prod_precocusto" data-obrigatorio />
+                            <input type="text" class="form-control" name="precocusto" id="prod_precocusto" data-tipo="currency" data-obrigatorio  />
                         </div>
                         <div class="form-group col-lg-6">
                             <label>P. venda*</label>
-                            <input type="text" class="form-control" name="precovenda" id="prod_precovenda" data-obrigatorio />
+                            <input type="text" class="form-control" name="precovenda" id="prod_precovenda" data-tipo="currency" data-obrigatorio />
                         </div>
                         <div>
                             <div class="form-group col-lg-12">
@@ -195,19 +200,24 @@
                             </div>
                             <div class="form-group col-lg-4">
                                 <label>Unidade*</label>
-                                <input type="text" class="form-control" name="unidade" id="modal_prod_unidade" data-obrigatorio />
+                                <select id="modal_prod_unidade" class="form-control" name="unidade" data-obrigatorio > 
+                                    <option value="">Selecione...</option> 
+                                    <option value="UNID">UNIDADE</option> 
+                                    <option value="METRO">METRO</option> 
+                                    <option value="JOGO">JOGO</option> 
+                                </select>
                             </div>
                             <div class="form-group col-lg-4">
-                                <label>Espessura.*</label>
-                                <input type="text" class="form-control" name="espessura" id="modal_prod_espessura" data-obrigatorio />
+                                <label>Espessura</label>
+                                <input type="text" class="form-control" name="espessura" id="modal_prod_espessura" />
                             </div>
                             <div class="form-group col-lg-6">
                                 <label>P. custo*</label>
-                                <input type="text" class="form-control" name="precocusto" id="modal_prod_precocusto" data-obrigatorio />
+                                <input type="text" class="form-control" name="precocusto" id="modal_prod_precocusto" data-tipo="currency" data-obrigatorio />
                             </div>
                             <div class="form-group col-lg-6">
                                 <label>P. venda*</label>
-                                <input type="text" class="form-control" name="precovenda" id="modal_prod_precovenda" data-obrigatorio />
+                                <input type="text" class="form-control" name="precovenda" id="modal_prod_precovenda" data-tipo="currency" data-obrigatorio />
                             </div>
                             <div>
                                 <div class="form-group col-lg-12">

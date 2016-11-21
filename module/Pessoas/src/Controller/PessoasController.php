@@ -72,6 +72,9 @@ class PessoasController extends GenericController {
         $dados = $request->getPost()->toArray();
         $srv_pes = $this->app()->getEntity('Pessoas');
         $pessoa = $srv_pes->getAllById($dados['id']);
+        if(sizeof($pessoa)>0){
+            $pessoa[0]['dtanascimento'] = implode('/', array_reverse(explode('-', $pessoa[0]['dtanascimento'])));
+        }
         return new JsonModel($pessoa);
     }
 }
