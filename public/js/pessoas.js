@@ -66,9 +66,9 @@ $(function () {
         $('input[id=pes_doc_num_' + tipo_slc + ']').removeClass('hide').attr('name', 'nrodocumento').attr('data-obrigatorio', '');
         
         if(tipo_slc == 'cpf'){
-            $('#pes_dta_nasc').show().attr('data-obrigatorio','');
+            $('#pes_dta_nasc').parent().show();
         } else {
-            $('#pes_dta_nasc').hide().removeAttr('data-obrigatorio');
+            $('#pes_dta_nasc').parent().hide();
         }
 
     });

@@ -22,6 +22,9 @@ class Module
                 Controller\ProdutosController::class => function( $sm ) {
                     return new Controller\ProdutosController($sm);
                 },
+                Controller\MarcasController::class => function( $sm ) {
+                    return new Controller\MarcasController($sm);
+                },
             ]
         ];
     }

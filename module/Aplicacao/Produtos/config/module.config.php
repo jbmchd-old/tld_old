@@ -33,6 +33,16 @@ return [
                     ],
                 ],
             ],
+            'produtos-marcas' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/produtos/marcas[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\MarcasController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'view_manager' => [
@@ -43,6 +53,7 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'telas/aplicacao/produtos'        => __DIR__ . '/../view/aplicacao/produtos/telas/produtos.phtml',
+            'telas/aplicacao/marcas'        => __DIR__ . '/../view/aplicacao/produtos/telas/marcas.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',

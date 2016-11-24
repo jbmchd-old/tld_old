@@ -1,6 +1,5 @@
 
-
-<script type="text/javascript" src="/public/js/aplicacao/produtos.js"></script>
+<script type="text/javascript" src="/public/js/aplicacao/produtos/produtos.js"></script>
 
 <div id="prod_janela" class="janela col-xs-offset-2 col-sm-offset-2 col-md-offset-1 col-lg-offset-1 col-lg-11" style="display: none" data-title="Produtos">
     <div class="divisao-janela">
@@ -18,19 +17,19 @@
                 <div class="col-lg-3">
                 
                     <fieldset>
-                        <legend>Marca:</legend>
+                        <legend>Fornecedores:</legend>
                         <div class="clearfix" style="margin: 7px 0;">
-                            <div class="col-lg-7" >
-                                <select id="prod_marca_select" class="form-control" name="marca_id" data-obrigatorio > <option>Selecione...</option> </select>
+                            <div class="col-lg-12" >
+                                <select id="prod_forn_select" class="form-control" name="fornecedor_id" data-obrigatorio > <option>Selecione...</option> </select>
                             </div>
-                            <div class="col-lg-5 text-center" >
-                                <button type="button" id="prod_add_marca" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Marca</button>
-                            </div>
-                            
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend class="clearfix" style="margin: 7px 0;">Produto: </legend>
+                        <div class="form-group col-lg-12" >
+                            <label>Marcas*</label>
+                            <select id="prod_marca_select" class="form-control" name="marca_id" data-obrigatorio > <option>Selecione...</option> </select>
+                        </div>
                         <div class="form-group col-lg-6">
                             <label>Localização*</label>
                             <select id="prod_veic_marca_select" class="form-control" name="veic_marca_id" data-obrigatorio > <option>Selecione...</option> </select>
@@ -91,11 +90,13 @@
                 </div>
                 <div class="col-lg-9">
                     <fieldset>
-                        <legend>Últimos lançamentos:</legend>
+                        <legend>Produtos:</legend>
                         <div class="col-lg-12" style="margin: 7px 0; max-height:400px; overflow:auto;">
                             <table id="prod_tabela" class="table table-bordered table-condensed">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
+                                        <th class="col-lg-1">Marca</th>
                                         <th class="col-lg-1">Localização</th>
                                         <th class="col-lg-1">Categoria</th>
                                         <th class="">Descrição</th>

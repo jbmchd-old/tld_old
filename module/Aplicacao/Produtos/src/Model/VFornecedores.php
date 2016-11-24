@@ -1,10 +1,10 @@
 <?php
 
-namespace Pessoas\Model;
+namespace Aplicacao\Produtos\Model;
 
 use ZeDb\Model;
 
-class VVeicMarcas extends Model {
+class VFornecedores extends Model {
     
     public function __construct($options = null) {
         $this->tableName = __CLASS__;

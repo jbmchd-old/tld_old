@@ -1,10 +1,10 @@
 <?php
 
-namespace Pessoas\Entity;
+namespace Aplicacao\Produtos\Entity;
 
 use ZeDb\Entity;
 
-class VVeicMarcas extends Entity {
+class VFornecedores extends Entity {
     
     public function __call($name, $arguments) {
         $attr = lcfirst(substr($name, 3));
