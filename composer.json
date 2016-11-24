@@ -34,7 +34,8 @@
             "Acesso\\": "module/Acesso/src/",
             "Pessoas\\": "module/Pessoas/src/",
             "Aplicacao\\Index\\": "module/Aplicacao/Index/src/",
-            "Aplicacao\\Produtos\\": "module/Aplicacao/Produtos/src/"
+            "Aplicacao\\Produtos\\": "module/Aplicacao/Produtos/src/",
+            "Aplicacao\\Manutencao\\": "module/Aplicacao/Manutencao/src/"
         }
     },
     "autoload-dev": {

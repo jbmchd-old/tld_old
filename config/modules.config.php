@@ -31,4 +31,5 @@ return [
     'Pessoas',
     'Aplicacao\Index',
     'Aplicacao\Produtos',
+    'Aplicacao\Manutencao',
 ];
