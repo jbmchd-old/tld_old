@@ -214,7 +214,7 @@ $(function () {
 
     });
 
-    $('a.open-app[data-title=Produtos]').click(function () {
+    $('.btn-app[data-title=Produtos]').click(function () {
         buscaFornecedores();
         buscaVeiculosMarcas();
         limpaCampos();

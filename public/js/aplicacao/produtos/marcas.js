@@ -147,7 +147,7 @@ $(function () {
         return false;
     });
 
-    $('a.open-app[data-title=ProdutosMarcas]').click(function () {
+    $('.btn-app[data-title=ProdutosMarcas]').click(function () {
         buscaFornecedores();
     });
 

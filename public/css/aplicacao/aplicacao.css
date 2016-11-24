@@ -125,14 +125,16 @@ th{
 
 .btn-app{
     transition: background 0.3s ease;
-    background: #383C3F;
-    color: #fff;
+    /*background: #383C3F;*/
+    background: #FFE8CF;
+    color: #FF9900;
     border: none;
-    padding: 13px;
-    margin-top: 10px ;
+    padding: 9px 30px;
+    /*margin-top: 10px ;*/
 }
 
 .btn-app:hover{
+    /*background: #FF9900;*/
     transition: background 0.3s ease;
 }
 

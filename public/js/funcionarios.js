@@ -146,7 +146,7 @@ $(function () {
         return false;
     });
 
-    $('a.open-app[data-title=Funcionarios]').click(function () {
+    $('.btn-app[data-title=Funcionarios]').click(function () {
         buscaFuncionarios();
     });
 

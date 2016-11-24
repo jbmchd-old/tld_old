@@ -22,32 +22,23 @@ $this->headMeta()->appendName('keywords', 'Sistema, Agendas');
             <div style="color: #FF9900; margin-top: 7px" ><img src="<?= $this->basePath() . 'public/img/id-visual/logo_36.png'?>" /></div>
         </div>
 
+        <style>
+            
+        </style>
+        
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a style="color:#FF9900" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <span class="fa fa-gear"></span> Cadastros <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <!--<li><a href="#" class="open-app" data-title="Pessoas"><i class="fa fa-user"></i> Pessoas</a></li>-->                             
-                        <li><a href="#" class="open-app" data-title="Funcionarios"><i class="fa fa-address-card"></i> Funcionários</a></li>                             
-<!--                        <li><a href="#" class="open-app" data-title="Veiculos"><i class="fa fa-car"></i> Veículos</a></li>                             -->
-                        <li><a href="#" class="open-app" data-title="Produtos"><i class="fa fa-shopping-cart"></i> Produtos</a></li>                             
-                        <li><a href="#" class="open-app" data-title="ProdutosMarcas"><i class="fa fa-shopping-cart"></i> Marcas de produtos</a></li>                             
-                    </ul>
-                </li>
+            <ul class="nav navbar-nav col-lg-push-3" style="position: relative">
+                <li> <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Pessoas" title="Pessoas"><i class="fa fa-user fa-2x" aria-hidden="true"></i><br /><span>Pessoas</span></button> </li>
+                <li> <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Funcionarios" title="Funcionários"><i class="fa fa-address-card fa-2x" aria-hidden="true"></i><br /><span>Funcionários</span></button> </li>
+                <li> <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Veiculos" title="Veiculos"><i class="fa fa-car fa-2x" aria-hidden="true"></i><br /><span>Veículos</span></button> </li>
+                <li> <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Produtos" title="Produtos"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><br /><span>Produtos</span></button> </li>
+                <li> <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="ProdutosMarcas" title="Marcas"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><br /><span>Marcas de produtos</span></button> </li>
             </ul>
             
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
-<div class="sidebar text-center" style="width: 50px">
-    <ul class="nav nav-sidebar">
-        <li> <button type="button" class="btn btn-app" style="padding: 13px" data-toggle="tooltip" data-placement="right" data-title="Pessoas" title="Pessoas"><i class="fa fa-user fa-1x" aria-hidden="true"></i></button> </li>
-        <li> <button type="button" class="btn btn-app" style="padding: 13px" data-toggle="tooltip" data-placement="right" data-title="Veiculos" title="Veiculos"><i class="fa fa-car fa-1x" aria-hidden="true"></i></button> </li>
-    </ul>
-</div>
 
 <!-- // Cabeçalho -->
 
