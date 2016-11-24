@@ -56,7 +56,7 @@ $(function () {
             table.html('');
             $(result).each(function (i, cada) {
                 table
-                    .append('<tr data-id="'+cada.id+'" data-marca_id="'+cada.marca_id+'" data-veic_marca_id="'+cada.veic_marca_id+'"><td>'+cada.id+'</td><td>'+cada.marca+'</td><td>'+cada.veic_marca+'</td><td>'+cada.categoria+'</td><td>'+cada.descricao+'</td><td>'+cada.quantidade+'</td><td>'+cada.unidade+'</td><td>'+cada.espessura+'</td><td data-tipo="currency">'+cada.precocusto+'</td><td data-tipo="currency">'+cada.precovenda+'</td><td>'+cada.status+'</td><td>'+cada.obs+'</td><td style="text-align:center"><button type="button"><i class="fa fa-edit"></i></button></td></tr>');
+                    .append('<tr data-id="'+cada.id+'" data-marca_id="'+cada.marca_id+'" data-veic_marca_id="'+cada.veic_marca_id+'"><td>'+cada.id+'</td><td>'+cada.marca+'</td><td>'+cada.veic_marca+'</td><td>'+cada.categoria+'</td><td>'+cada.codigoauxiliar+'</td><td>'+cada.descricao+'</td><td>'+cada.quantidade+'</td><td>'+cada.unidade+'</td><td>'+cada.espessura+'</td><td data-tipo="currency">'+cada.precocusto+'</td><td data-tipo="currency">'+cada.precovenda+'</td><td>'+cada.status+'</td><td>'+cada.obs+'</td><td style="text-align:center"><button type="button"><i class="fa fa-edit"></i></button></td></tr>');
             })
             
             $('.table').formatacao().tabela();
@@ -156,19 +156,21 @@ $(function () {
         var veic_marca_id = $(this).parents('tr').attr('data-veic_marca_id');
         
         var categoria = tds.filter(':nth-child(4)').html();
-        var descricao = tds.filter(':nth-child(5)').html();
-        var quantidade = tds.filter(':nth-child(6)').html();
-        var unidade = tds.filter(':nth-child(7)').html();
-        var espessura = tds.filter(':nth-child(8)').html();
-        var precocusto = tds.filter(':nth-child(9)').html();
-        var precovenda = tds.filter(':nth-child(10)').html();
-        var status = tds.filter(':nth-child(11)').html();
-        var obs = tds.filter(':nth-child(12)').html();
+        var codaux = tds.filter(':nth-child(5)').html();
+        var descricao = tds.filter(':nth-child(6)').html();
+        var quantidade = tds.filter(':nth-child(7)').html();
+        var unidade = tds.filter(':nth-child(8)').html();
+        var espessura = tds.filter(':nth-child(9)').html();
+        var precocusto = tds.filter(':nth-child(10)').html();
+        var precovenda = tds.filter(':nth-child(11)').html();
+        var status = tds.filter(':nth-child(12)').html();
+        var obs = tds.filter(':nth-child(13)').html();
 
         $('#modal_prod_id').val(id);
         $('#modal_prod_marca_select').val(marca_id);
         $('#modal_prod_veic_select').val(veic_marca_id);
         $('#modal_prod_categoria').val(categoria);
+        $('#modal_prod_codauxiliar').val(codaux);
         $('#modal_prod_descricao').val(descricao);
         $('#modal_prod_quantidade').val(quantidade);
         $('#modal_prod_unidade').val(unidade);
