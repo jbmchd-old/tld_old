@@ -251,7 +251,7 @@ $(function () {
 
     });
 
-    $('a.open-app[data-title=Veiculos]').click(function () {
+    $('.btn-app[data-title=Veiculos]').click(function () {
         buscaPessoas();
         buscaMarcas();
         limpaCampos();

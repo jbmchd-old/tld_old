@@ -127,7 +127,7 @@ $(function () {
         return false;
     });
 
-    $('a.open-app[data-title=Pessoas]').click(function (){
+    $('.btn-app[data-title=Pessoas]').click(function (){
         buscaPessoas();
     });
 
