@@ -1,223 +1,407 @@
 
 $(function () {
-    return;
-    function buscaFornecedores() {
+
+
+    buscaClientes();
+    buscaProdutos();
+
+//    $('#manut_modal_id').val(5);
+//    $('#manut_modal_manut').modal();
+
+    var aux_veic_id_select = 0;
+
+    function buscaClientes() {
         $.ajax({
-            url: "/produtos/buscaFornecedores",
+            url: "/manutencao/buscaClientes",
         }).done(function (result) {
-            $('#prod_forn_select').html('<option value="0">Selecione...</option>');
+            $('#manut_cli_select, #manut_modal_cli_select').html('<option value="0">Selecione...</option>');
 
             $(result).each(function (i, cada) {
-                $('#prod_forn_select').append('<option value="' + cada.id + '">' + cada.nome_razao + '</option>');
+                $('#manut_cli_select, #manut_modal_cli_select').append('<option value="' + cada.id + '">' + cada.nome_razao + '</option>');
             })
         });
 
-        limpaCampos();
+//        limpaCampos();
     }
-
-    function buscaVeiculosMarcas() {
-        
+    
+    function buscaOrdensServico(cliente_id){
         $.ajax({
-            url: "/produtos/buscaVeiculosMarcas",
+            url: "/manutencao/buscaOrdensServico",
+            data: {cliente_id: cliente_id}
         }).done(function (result) {
+            $('#manut_tab_os tbody').html('');
             
-            $('#prod_veic_marca_select, #modal_prod_veic_select').html('<option value="0">Selecione...</option>');
-
-            $(result).each(function (i, cada) {
-                $('#prod_veic_marca_select, #modal_prod_veic_select').append('<option value="' + cada.id + '">' + cada.nome + '</option>');
-            });
-        });
-
-    }
-
-    function buscaMarcas(fornecedor_id) {
-        $.ajax({
-            url: "/produtos/buscaMarcas",
-            data: {fornecedor_id: fornecedor_id}
-        }).done(function (result) {
-            $('#prod_marca_select, #modal_prod_marca_select').html('<option value="0">Selecione...</option>');
-
-            $(result).each(function (i, cada) {
-                $('#prod_marca_select, #modal_prod_marca_select').append('<option value="' + cada.id + '">' + cada.nome + '</option>');
+            $(result).each(function (i, cada){
+                $('#manut_tab_os tbody').append('<tr data-id="'+cada.id+'"><td>'+cada.id+'</td><td>'+cada.ordemservico+'</td><td>'+cada.placa+'</td><td>'+cada.descricao+'</td><td data-tipo=date>'+cada.dtainclusao+'</td><td><a href="/manutencao/exibe-os/'+cada.id+'" target="_blank" class="btn btn-default" name="print"><i class="fa fa-print"></i></a></td><td><a href="#" target="_blank" class="btn btn-default" name="edit"><i class="fa fa-edit"></i></a></td></tr>');
             })
+            
+            $('#manut_tab_os').formatacao().tabela();
         });
     }
     
-    function buscaProdutos() {
-        
-        var fornecedor_id = $('#prod_forn_select').val();
-        
+    function buscaVeiculos(cliente_id, destino_id) {
         $.ajax({
-            url: "/produtos/buscaProdutos",
-            data: {fornecedor_id: fornecedor_id}
+            url: "/manutencao/buscaVeiculos",
+            data: {cliente_id: cliente_id}
         }).done(function (result) {
             
-            var table = $('#prod_tabela tbody');
-            table.html('');
+            $(destino_id).html('<option value="0">Selecione...</option>');
+
             $(result).each(function (i, cada) {
-                table
-                    .append('<tr data-id="'+cada.id+'" data-marca_id="'+cada.marca_id+'" data-veic_marca_id="'+cada.veic_marca_id+'"><td>'+cada.id+'</td><td>'+cada.marca+'</td><td>'+cada.veic_marca+'</td><td>'+cada.categoria+'</td><td>'+cada.codigoauxiliar+'</td><td>'+cada.descricao+'</td><td>'+cada.quantidade+'</td><td>'+cada.unidade+'</td><td>'+cada.espessura+'</td><td data-tipo="currency">'+cada.precocusto+'</td><td data-tipo="currency">'+cada.precovenda+'</td><td>'+cada.status+'</td><td>'+cada.obs+'</td><td style="text-align:center"><button type="button"><i class="fa fa-edit"></i></button></td></tr>');
-            })
+                $(destino_id).append('<option value="' + cada.id + '">' + cada.placa + '</option>');
+            });
             
-            $('.table').formatacao().tabela();
+            if(destino_id==='#manut_modal_veic_select'){
+                $(destino_id).val(aux_veic_id_select);
+            }
+            
+            
         });
+    }
+
+    function buscaProdutos() {
+        $.ajax({
+            url: "/manutencao/buscaProdutos",
+        }).done(function (result) {
+            $("#manut_prod").autocomplete({
+                source: result,
+                minLength: 1,
+                select: function( event, ui ) {
+                    $('#manut_prod_qtd').focus();
+                }
+            });
+            
+            $("#manut_modal_prod").autocomplete({
+                source: result,
+                minLength: 1,
+                select: function( event, ui ) {
+                    $('#manut_modal_prod_qtd').focus();
+                }
+            });
+            
+        });
+    }
+
+    function adicionaProduto(cod_prod, origem_id) {
+        $.ajax({
+            url: "/manutencao/buscaProduto",
+            data:{id:cod_prod}
+        }).done(function (result) {
+            
+            if(origem_id === '#manut_prod'){
+                var quant_solic = $('#manut_prod_qtd').val();
+                var total = result.precovenda*quant_solic;
+                var tr_existente = $('#manut_tab_produtos tbody tr[data-id='+cod_prod+']');
+                
+                if(tr_existente.length>0){
+                    tr_existente.find('td[name=quantidade]').html(quant_solic);
+                    tr_existente.find('td[name=total]').html(total);
+                } else {
+                    $('#manut_tab_produtos tbody').append('<tr data-id="'+result.id+'"><td name="id">'+result.id+'</td><td name="descricao">'+result.descricao+'</td><td name="quantidade">'+quant_solic+'</td><td name="precovenda" data-tipo="currency">'+result.precovenda+'</td><td name="total" data-tipo="currency">'+total+'</td><td><button class="btn btn-default"><i class="fa fa-minus-circle"></i></button></td></tr>');
+                }
+                $('#manut_prod').val('');
+                atualizaTotal(origem_id);
+                $('#manut_tab_produtos').formatacao().tabela();
+            } else {
+                var quant_solic = $('#manut_modal_prod_qtd').val();
+                var total = result.precovenda*quant_solic;
+                var tr_existente = $('#manut_modal_tab_produtos tbody tr[data-id='+cod_prod+']');
+                
+                if(tr_existente.length>0){
+                    tr_existente.find('td[name=quantidade]').html(quant_solic);
+                    tr_existente.find('td[name=total]').html(total);
+                } else {
+                    $('#manut_modal_tab_produtos tbody').append('<tr data-id="'+result.id+'"><td name="id">'+result.id+'</td><td name="descricao">'+result.descricao+'</td><td name="quantidade">'+quant_solic+'</td><td name="precovenda" data-tipo="currency">'+result.precovenda+'</td><td name="total" data-tipo="currency">'+total+'</td><td><button class="btn btn-default"><i class="fa fa-minus-circle"></i></button></td></tr>');
+                }
+                
+                $('#manut_modal_prod').val('');
+                atualizaTotal(origem_id);
+                $('#manut_modal_tab_produtos').formatacao().tabela();
+            }
+            
+        });
+    }
+    
+    function totalizaMaoDeObra(origem_id){
+        
+        if(origem_id === 'manut_mao_obra' || origem_id === 'manut_mao_obra_perc_desc'){
+            
+            var valor = parseFloat($('#manut_mao_obra').val());
+            var desc = parseFloat($('#manut_mao_obra_perc_desc').val());
+            var total_desc = parseFloat((valor*desc)/100);
+            var total = (desc>0)?valor-(valor*desc)/100:valor;
+
+            $('#manut_mao_obra_desc').val(total_desc.toFixed(2));
+            $('#manut_mao_obra_total').val(total.toFixed(2));
+            
+        } else {
+            
+            var valor = parseFloat($('#manut_modal_mao_obra').val());
+            var desc = parseFloat($('#manut_modal_mao_obra_perc_desc').val());
+            var total_desc = parseFloat((valor*desc)/100);
+            var total = (desc>0)?valor-(valor*desc)/100:valor;
+
+            $('#manut_modal_mao_obra_desc').val(total_desc.toFixed(2));
+            $('#manut_modal_mao_obra_total').val(total.toFixed(2));
+            
+        }
+        
+        atualizaTotal(origem_id);
+    }
+    
+    function atualizaTotal(origem_id){
+        var total_preco = 0;
+        var total_itens = 0;
+        console.log(origem_id);
+        if(origem_id==='#manut_prod' || origem_id==='manut_tab_produtos' || origem_id==='manut_mao_obra' || origem_id==='manut_mao_obra_perc_desc'){  
+            
+            $('#manut_tab_produtos tbody td[name=total]').each(function (i, cada){
+                total_preco+=parseFloat($(this).html());
+            });
+            total_preco += parseFloat($('#manut_mao_obra_total').val());
+
+            $('#manut_tab_produtos tbody td[name=quantidade]').each(function (i, cada){
+                total_itens+=parseFloat($(this).html());
+            });
+
+            $('#manut_total_preco').html(total_preco);
+            $('#manut_total_itens').html(total_itens);
+            
+        } else {
+            
+            $('#manut_modal_tab_produtos tbody td[name=total]').each(function (i, cada){
+                total_preco+=parseFloat($(this).html());
+            });
+            total_preco += parseFloat($('#manut_modal_mao_obra_total').val());
+
+            $('#manut_modal_tab_produtos tbody td[name=quantidade]').each(function (i, cada){
+                total_itens+=parseFloat($(this).html());
+            });
+
+            $('#manut_modal_total_preco').html(total_preco);
+            $('#manut_modal_total_itens').html(total_itens);
+            
+        }
+        
     }
     
     function limpaCampos() {
-        $('#prod_form').find('.form-control').each(function () {
+        return ;
+        $('#manut_form').find('.form-control').each(function () {
             if (this.tagName == 'SELECT') {
-                if(this.id != 'prod_forn_select'){ this.value = $(this).find('option:first').val(); }
+                this.value = $(this).find('option:first').val();
             } else {
                 $(this).val('');
             }
-            $('#prod_status').prop('checked', true);
+            
         });
     }
 
-    function salvar(id,marca_id,veic_marca_id,categoria,descricao,quantidade,unidade,espessura,precocusto,precovenda,obs,status) {
+    function salvar(id, cliente_id, veic_id, descricao, precomaodeobra, percdescmaodeobra, precomaodeobratotal, formapagto, produtos) {
+        
         $.ajax({
-            url: "/produtos/salvar",
+            url: "/manutencao/salvar",
             data: {
-                id: id,
-                marca_id: marca_id,
-                veic_marca_id: veic_marca_id,
-                categoria: categoria,
-                descricao: descricao,
-                quantidade: quantidade,
-                unidade: unidade,
-                espessura: espessura,
-                precocusto: precocusto,
-                precovenda: precovenda,
-                obs: obs,
-                status: status,
+                id:id,
+                cliente_id:cliente_id,
+                veiculo_id:veic_id,
+                descricao:descricao,
+                precomaodeobra:precomaodeobra,
+                percdescmaodeobra:percdescmaodeobra,
+                precomaodeobratotal:precomaodeobratotal,
+                formapagto:formapagto,
+                produtos:produtos,
             }
         }).done(function (result) {
-            
-            var div_alertas = (id > 0) ? '#prod_modal_alertas' : '#prod_alertas';
+
+            var div_alertas = (id > 0) ? '#manut_modal_alertas' : '#manut_alertas';
             if (result.hasOwnProperty('error')) {
                 $(div_alertas).showMessageTarge({type: 'warning'});
                 return false;
             }
 
-            $('#prod_modal_prod').modal('hide');
-            $('#prod_alertas').showMessageTarge({type: 'success'});
+            $('#manut_modal_manut').modal('hide');
+            $('#manut_alertas').showMessageTarge({type: 'success'});
 
+            buscaOrdensServico(cliente_id);
             buscaProdutos();
-            limpaCampos();
+//            limpaCampos();
         });
     }
-    
-    $('#prod_forn_select').change(function (){
+
+    $('#manut_cli_select').change(function () {
         var id = $(this).val();
         if (id > 0) {
-            buscaMarcas(id);
-            buscaProdutos();
+            buscaVeiculos(id, '#manut_veic_select');
+            buscaOrdensServico(id)
         } else {
-            limpaCampos();
-            $('#prod_tabela tbody').html('');
+//            limpaCampos();
+            $('#manut_tab_os tbody').html('');
         }
     });
 
-    $('#prod_desfazer').click(function (){ limpaCampos(); });
-    
-    $('#prod_form').submit(function () {
+    $('#manut_modal_cli_select').change(function () {
+        var id = $(this).val();
+        if (id > 0) {
+            buscaVeiculos(id, '#manut_modal_veic_select');
+        } else {
+//            limpaCampos();
+        }
+    });
 
-        if (!tudo_ok) {
-            $('#prod_alertas').showMessageTarge({
-                message: 'Verifique os campos obrigatórios.',
-                type: 'warning'
-            });
-            return false;
+    $('#manut_prod_add, #manut_modal_prod_add').click(function (){
+        var id = this.id;
+        
+        if(id === 'manut_prod_add'){
+            var prod = $('#manut_prod').val();
+            if(prod.length < 1){return false;}
+
+            var prod_cod = prod.split('-').shift().trim();
+            adicionaProduto(prod_cod, '#manut_prod');
+            $('#manut_tab_produtos').formatacao().tabela();
+        } else {
+            var prod = $('#manut_modal_prod').val();
+            if(prod.length < 1){return false;}
+
+            var prod_cod = prod.split('-').shift().trim();
+            adicionaProduto(prod_cod, '#manut_modal_prod');
+            $('#manut_modal_tab_produtos').formatacao().tabela();
         }
         
-        var marca_id=$('#prod_marca_select').val();
-        var veic_marca_id = $('#prod_veic_marca_select').val();
-        var categoria = $('#prod_categoria').val();
-        var descricao = $('#prod_descricao').val();
-        var quantidade = $('#prod_quantidade').val();
-        var unidade = $('#prod_unidade').val();
-        var espessura = $('#prod_espessura').val();
-        var precocusto = $('#prod_precocusto').val();
-        var precovenda = $('#prod_precovenda').val();
-        var obs = $('#prod_obs').val();
-        var status = ($('#prod_status').prop('checked')==true)?'A':'I';
+    });
+    
+    $('#manut_tab_produtos, #manut_modal_tab_produtos').on('click', 'button', function () {
+        var origem_id = $(this).parents('table').attr('id');
+        $(this).parents('tr').remove();
+        atualizaTotal(origem_id);
+    });
+    
+//    $('#manut_tab_os').on('click', 'a[name=print]', function () {
+//        var id = $(this).parents('tr').attr('data-id');
+//        
+//        $().alert("Em breve...");
+//        
+//        return false;
+//    });
+    
+    $('#manut_tab_os').on('click', 'a[name=edit]', function () {
+        var os_id = $(this).parents('tr').attr('data-id');
         
-        salvar(null,marca_id,veic_marca_id,categoria,descricao,quantidade,unidade,espessura,precocusto,precovenda,obs,status);
+        $.ajax({
+            url: "/manutencao/buscaOrdemServico",
+            data: {id: os_id}
+        }).done(function (result) {
 
+            $(result).each(function (i, cada){
+                aux_veic_id_select = cada.veiculo_id;
+                
+                $('#manut_modal_cli_select').val(cada.cliente_id).change();
+                $('#manut_modal_id').val(cada.id);
+                $('#manut_modal_descricao').val(cada.descricao);
+                $('#manut_modal_mao_obra').val(cada.precomaodeobra);
+                $('#manut_modal_mao_obra_perc_desc').val(cada.percdescmaodeobra);
+                $('#manut_modal_mao_obra_total').val(cada.precomaodeobratotal);
+                $('#manut_modal_form input[name=formapagto][value='+cada.formapagto+']').prop('checked', true);
+                
+                if(parseInt(cada.produto_id)>0){
+                    adicionaProduto(cada.produto_id);
+                } else {
+                    atualizaTotal();
+                }
+                
+            });
+            
+            $('#manut_modal_manut').modal();
+        });
+    
         return false;
     });
     
-    $('#prod_tabela').on('click', 'button', function () {
+    $('#manut_mao_obra_perc_desc, #manut_modal_mao_obra_perc_desc').change(function (e){
+        totalizaMaoDeObra(this.id);
+    });
         
-        var tds = $(this).parents('tr').children();
-
-        var id = $(this).parents('tr').attr('data-id');
-        var marca_id = $(this).parents('tr').attr('data-marca_id');
-        var veic_marca_id = $(this).parents('tr').attr('data-veic_marca_id');
-        
-        var categoria = tds.filter(':nth-child(4)').html();
-        var codaux = tds.filter(':nth-child(5)').html();
-        var descricao = tds.filter(':nth-child(6)').html();
-        var quantidade = tds.filter(':nth-child(7)').html();
-        var unidade = tds.filter(':nth-child(8)').html();
-        var espessura = tds.filter(':nth-child(9)').html();
-        var precocusto = tds.filter(':nth-child(10)').html();
-        var precovenda = tds.filter(':nth-child(11)').html();
-        var status = tds.filter(':nth-child(12)').html();
-        var obs = tds.filter(':nth-child(13)').html();
-
-        $('#modal_prod_id').val(id);
-        $('#modal_prod_marca_select').val(marca_id);
-        $('#modal_prod_veic_select').val(veic_marca_id);
-        $('#modal_prod_categoria').val(categoria);
-        $('#modal_prod_codauxiliar').val(codaux);
-        $('#modal_prod_descricao').val(descricao);
-        $('#modal_prod_quantidade').val(quantidade);
-        $('#modal_prod_unidade').val(unidade);
-        $('#modal_prod_espessura').val(espessura);
-        $('#modal_prod_precocusto').val(precocusto);
-        $('#modal_prod_precovenda').val(precovenda);
-        $('#modal_prod_obs').val(obs);
-        $('#modal_prod_status').prop('checked',(status=='A')?true:false);
-
-        $form().atrelaEventosPorAtributos( $('#prod_modal_form').find( campos_texto.join() ) );
-
-        $('#prod_modal_prod').modal();
+    $('#manut_mao_obra, #manut_mao_obra_perc_desc, #manut_modal_mao_obra, #manut_modal_mao_obra_perc_desc').keyup(function (e){
+        totalizaMaoDeObra(this.id);
     });
     
-    $('#prod_modal_form').submit(function () {
-        
-        if (!tudo_ok) {
-            $('#prod_modal_alertas').showMessageTarge({
-                message: 'Verifique os campos obrigatórios.',
-                type: 'warning'
-            });
-            return false;
-        }
-
-        var id=$('#modal_prod_id').val();
-        var marca_id=$('#modal_prod_marca_select').val();
-        var veic_marca_id = $('#modal_prod_veic_select').val();
-        var categoria = $('#modal_prod_categoria').val();
-        var descricao = $('#modal_prod_descricao').val();
-        var quantidade = $('#modal_prod_quantidade').val();
-        var unidade = $('#modal_prod_unidade').val();
-        var espessura = $('#modal_prod_espessura').val();
-        var precocusto = $('#modal_prod_precocusto').val();
-        var precovenda = $('#modal_prod_precovenda').val();
-        var obs = $('#modal_prod_obs').val();
-        var status = ($('#modal_prod_status').prop('checked')==true)?'A':'I';
-        
-        salvar(id,marca_id,veic_marca_id,categoria,descricao,quantidade,unidade,espessura,precocusto,precovenda,obs,status);
-        
-        return false;
-
-    });
-
-    $('.btn-app[data-title=Produtos]').click(function () {
-        buscaFornecedores();
-        buscaVeiculosMarcas();
+    $('#manut_desfazer').click(function () {
         limpaCampos();
     });
-    
+
+    $('#manut_form').submit(function () {
+
+        if (!tudo_ok) {
+            $('#manut_alertas').showMessageTarge({
+                message: 'Verifique os campos obrigatórios.',
+                type: 'warning'
+            });
+            return false;
+        }
+        
+        var cliente_id=$('#manut_cli_select').val();
+        var veic_id=$('#manut_veic_select').val();
+        var descricao=$('#manut_descricao').val();
+        var precomaodeobra=$('#manut_mao_obra').val();
+        var percdescmaodeobra=$('#manut_mao_obra_perc_desc').val();
+        var precomaodeobratotal=$('#manut_mao_obra_total').val();
+        var formapagto=$('#manut_form input[name=formapagto]:checked').val();
+        
+        var produtos=[];
+        $('#manut_tab_produtos tbody tr').each(function (i, cada){
+            var produto = {};
+            produto = {
+                produto_id: $(this).find('td[name=id]').html(),
+                quantidade: $(this).find('td[name=quantidade]').html()
+            }
+            
+            produtos.push(produto)
+        });
+
+        salvar(null, cliente_id, veic_id, descricao, precomaodeobra, percdescmaodeobra, precomaodeobratotal, formapagto, produtos);
+
+        return false;
+    });
+
+    $('#manut_modal_form').submit(function () {
+
+        if (!tudo_ok) {
+            $('#manut_alertas').showMessageTarge({
+                message: 'Verifique os campos obrigatórios.',
+                type: 'warning'
+            });
+            return false;
+        }
+        
+        var id=$('#manut_modal_id').val();
+        var cliente_id=$('#manut_modal_cli_select').val();
+        var veic_id=$('#manut_modal_veic_select').val();
+        var descricao=$('#manut_modal_descricao').val();
+        var precomaodeobra=$('#manut_modal_mao_obra').val();
+        var percdescmaodeobra=$('#manut_modal_mao_obra_perc_desc').val();
+        var precomaodeobratotal=$('#manut_modal_mao_obra_total').val();
+        var formapagto=$('#manut_modal_form input[name=formapagto]:checked').val();
+        
+        var produtos=[];
+        $('#manut_modal_tab_produtos tbody tr').each(function (i, cada){
+            var produto = {};
+            produto = {
+                produto_id: $(this).find('td[name=id]').html(),
+                quantidade: $(this).find('td[name=quantidade]').html()
+            }
+            
+            produtos.push(produto)
+        });
+
+        salvar(id, cliente_id, veic_id, descricao, precomaodeobra, percdescmaodeobra, precomaodeobratotal, formapagto, produtos);
+
+        return false;
+    });
+
+    $('.btn-app[data-title=Manutencao]').click(function () {
+        buscaClientes();
+        buscaProdutos();
+//        limpaCampos();
+    });
+
 });

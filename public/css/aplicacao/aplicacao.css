@@ -7,6 +7,11 @@ select{
     max-height: 30px;
 }
 
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .navbar-default {
   color: #fff;
 }
@@ -90,15 +95,15 @@ select{
 }
 
 .table button{
-    background: transparent;
+    /*background: transparent;*/
     border: none;
-    padding: 0;
-    color: #d33131;
+    padding: 2px 6px;
+    /*color: #d33131;*/
     font-size: 16px;
 }
 
 .table button:hover{
-    color: #8e1a1a;
+    color: #FF9900;
 }
 
 th{
@@ -162,7 +167,7 @@ th{
 }
 
 .table tbody td {
-    text-align: left;
+    text-align: center;
     padding: 0;
 }
 
@@ -195,3 +200,5 @@ form {
 .display-none {display: none}
 
 .fa-1x { font-size: 1.5em; }
+
+.ui-autocomplete {z-index: 10000;}

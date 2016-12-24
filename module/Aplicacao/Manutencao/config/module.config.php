@@ -5,7 +5,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Aplicacao\Produtos;
+namespace Aplicacao\Manutencao;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
@@ -26,7 +26,7 @@ return [
             'manutencao' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/manutencao[/:action]',
+                    'route'    => '/manutencao[/:action[/:id]]',
                     'defaults' => [
                         'controller' => Controller\ManutencaoController::class,
                         'action'     => 'index',
