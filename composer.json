@@ -36,7 +36,8 @@
             "Pessoas\\": "module/Pessoas/src/",
             "Aplicacao\\Index\\": "module/Aplicacao/Index/src/",
             "Aplicacao\\Produtos\\": "module/Aplicacao/Produtos/src/",
-            "Aplicacao\\Manutencao\\": "module/Aplicacao/Manutencao/src/"
+            "Aplicacao\\Manutencao\\": "module/Aplicacao/Manutencao/src/",
+            "Aplicacao\\Financeiro\\": "module/Aplicacao/Financeiro/src/"
         }
     },
     "autoload-dev": {

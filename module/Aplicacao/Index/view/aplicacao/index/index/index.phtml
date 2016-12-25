@@ -29,6 +29,7 @@ $this->headMeta()->appendName('keywords', 'Sistema, Agendas');
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             
             <ul class="nav navbar-nav col-lg-push-3" style="position: relative">
+                <li> <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Financeiro" title="Financeiro"><i class="fa fa-money fa-2x" aria-hidden="true"></i><br /><span>Financeiro</span></button> </li>
                 <li> <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Manutencao" title="Manutenção"><i class="fa fa-wrench fa-2x" aria-hidden="true"></i><br /><span>Manutenção</span></button> </li>
                 <li style="border-left: 1px solid #FF9900"> <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Pessoas" title="Pessoas"><i class="fa fa-user fa-2x" aria-hidden="true"></i><br /><span>Pessoas</span></button> </li>
                 <li> <button type="button" class="btn btn-app" data-toggle="tooltip" data-placement="right" data-title="Funcionarios" title="Funcionários"><i class="fa fa-address-card fa-2x" aria-hidden="true"></i><br /><span>Funcionários</span></button> </li>
@@ -53,5 +54,6 @@ $this->headMeta()->appendName('keywords', 'Sistema, Agendas');
     <?php echo $this->partial('telas/aplicacao/produtos', ['variaveis'=>$this->telas]) ?>
     <?php echo $this->partial('telas/aplicacao/marcas', ['variaveis'=>$this->telas]) ?>
     <?php echo $this->partial('telas/aplicacao/manutencao', ['variaveis'=>$this->telas]) ?>
+    <?php echo $this->partial('telas/aplicacao/financeiro/lancamentos', ['variaveis'=>$this->telas]) ?>
    
 </div>

@@ -1,0 +1,41 @@
+<?php
+$usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
+?>
+<script type="text/javascript" src="/public/js/aplicacao/financeiro/lancamentos.js"></script>
+
+<div id="finan_janela" class="janela col-lg-push-2 col-lg-7" style="display: non" data-title="Financeiro">
+    <div class="divisao-janela">
+        <form method="POST" action="" id="finan_form">
+            <div class="modal-header">
+                <button type="button" data-toggle="tooltip" data-placement="bottom" title="Fechar">
+                    <i class="fa fa-close "></i>
+                </button>
+                <h4 class="modal-title"><i class="fa fa-money"></i> Lançamentos </h4>
+            </div>
+            <div class="modal-body clearfix" style="padding-bottom: 5px;">
+
+                <div id="finan_alertas" class="label label-default col-lg-12 hide"></div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="finan_modal_lanc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-l">
+            <form id="finan_modal_form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close "></i></button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit "></i> Alterar</h4>
+                </div>
+                <div class="modal-body clearfix">
+
+                    <div id="finan_modal_alertas" class="label label-default col-lg-12 hide"></div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

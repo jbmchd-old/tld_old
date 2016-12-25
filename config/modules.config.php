@@ -32,4 +32,5 @@ return [
     'Aplicacao\Index',
     'Aplicacao\Produtos',
     'Aplicacao\Manutencao',
+    'Aplicacao\Financeiro',
 ];

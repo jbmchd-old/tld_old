@@ -1,13 +1,6 @@
 
 $(function () {
 
-
-    buscaClientes();
-    buscaProdutos();
-
-//    $('#manut_modal_id').val(5);
-//    $('#manut_modal_manut').modal();
-
     var aux_veic_id_select = 0;
 
     function buscaClientes() {
@@ -275,14 +268,6 @@ $(function () {
         $(this).parents('tr').remove();
         atualizaTotal(origem_id);
     });
-    
-//    $('#manut_tab_os').on('click', 'a[name=print]', function () {
-//        var id = $(this).parents('tr').attr('data-id');
-//        
-//        $().alert("Em breve...");
-//        
-//        return false;
-//    });
     
     $('#manut_tab_os').on('click', 'a[name=edit]', function () {
         var os_id = $(this).parents('tr').attr('data-id');
