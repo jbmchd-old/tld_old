@@ -261,7 +261,7 @@
                 case 'warning':
                     settings.message = 'Alguma coisa não está certa, verifique.';
                     break;
-                case 'erro':
+                case 'danger':
                     settings.message = 'Algum erro aconteceu, verifique.';
                     break;
                 default : 
@@ -276,7 +276,7 @@
                 .html(settings.message)
                 .removeClass()
                 .addClass('col-lg-12 label label-'+settings.type)
-                .attr('style','margin-bottom:5px;')
+                .attr('style','margin-bottom:5px;border-radius:0')
                 .slideDown("slow", function(){
                     setTimeout(function(){ 
                        $(destino).hide();

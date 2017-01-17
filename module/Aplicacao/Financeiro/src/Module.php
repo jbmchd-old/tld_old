@@ -19,12 +19,10 @@ class Module
     public function getControllerConfig() {
         return [ 
             'factories' => [
-                Controller\FinanceiroController::class => function( $sm ) {
-                    return new Controller\FinanceiroController($sm);
+            Controller\LancamentosController::class => function( $sm ) {
+                    return new Controller\LancamentosController($sm);
                 },
-                Controller\FinanCategoriaController::class => function( $sm ) {
-                    return new Controller\FinanCategoriaController($sm);
-                },
+                
             ]
         ];
     }

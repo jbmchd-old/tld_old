@@ -16,7 +16,7 @@ return [
             'financeiro-home' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route'    => '/financeiro',
+                    'route'    => '/finan',
                     'defaults' => [
                         'controller' => Controller\LancamentosController::class,
                         'action'     => 'index',
