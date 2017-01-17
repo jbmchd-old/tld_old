@@ -15,7 +15,7 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
     }
 </style>
 
-<div id="finan_lanc_janela" class="janela col-lg-push-2 col-lg-7" style="display: non" data-title="Financeiro">
+<div id="finan_lanc_janela" class="janela col-lg-push-2 col-lg-7" style="display: none" data-title="Financeiro">
     <div class="divisao-janela">
         <form method="POST" action="" id="finan_lanc_form">
             <div class="modal-header">
@@ -64,7 +64,7 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
 
                         <div class="form-group col-lg-6">
                             <label>Valor</label>
-                            <input class="form-control" id="finan_lanc_valor" data-obrigatorio />
+                            <input class="form-control" id="finan_lanc_valor" data-tipo="currency" data-obrigatorio />
                         </div>
                     </div>
                     
@@ -76,7 +76,7 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                         
                         <div class="form-group col-lg-6">
                             <label>Data Pagamento</label>
-                            <input class="form-control" id="finan_lanc_dtapagamento" readonly />
+                            <input class="form-control" id="finan_lanc_dtapagamento" data-tipo="currency" readonly />
                         </div>
 
                     </div>

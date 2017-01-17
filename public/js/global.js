@@ -13,7 +13,7 @@ function main() {
             dataType: 'json',
             type: 'POST',
             beforeSend: function ()     { $().loading(true, this);  },
-            complete:   function ()     { $().loading(false, this); },
+            complete:   function ()     { $().loading(false, this); $('.table').formatacao().tabela(); },
             error:      function (error){ console.log(error); },
         });
         

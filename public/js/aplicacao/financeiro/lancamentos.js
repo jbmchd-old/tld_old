@@ -7,7 +7,7 @@ $(function () {
         changeYear: true,
     });
     $("#finan_lanc_dtavencimento, #finan_lanc_dtapagamento" ).datepicker( "setDate", "0" );
-    $("#finan_lanc_pesq_inicio" ).datepicker( "setDate", "-31" );
+    $("#finan_lanc_pesq_inicio" ).datepicker( "setDate", "-32" );
     $("#finan_lanc_pesq_fim" ).datepicker( "setDate", "-1" );
     /*CAMPOS DE DATA - FIM*/
 
@@ -233,12 +233,15 @@ $(function () {
                 
                 var background = cada.situacao=='P'?'#deffde':'#ffeaea';
                 
+                cada.dtavencimento = cada.dtavencimento?cada.dtavencimento.split('-').reverse().join('/'):'-';
+                cada.dtapagamento = cada.dtapagamento?cada.dtapagamento.split('-').reverse().join('/'):'-';
+                
                 if(cada.tipo === 'R'){
-                    $('#finan_lanc_modal_list_tb_rec tbody').append('<tr data-id="'+cada.id+'" style="background:'+background+'"><td>'+cada.id+'</td><td>'+cada.descricao+'</td><td>'+cada.valor+'</td><td>'+cada.categoria_nome+'</td><td>'+cada.situacao+'</td><td>'+cada.dtavencimento+'</td><td>'+cada.dtapagamento+'</td><td><button type="button" class="btn btn-default" name="edit"><i class="fa fa-edit"></i></button></td></tr>');
+                    $('#finan_lanc_modal_list_tb_rec tbody').append('<tr data-id="'+cada.id+'" style="background:'+background+'"><td>'+cada.id+'</td><td>'+cada.descricao+'</td><td data-tipo="currency">'+cada.valor+'</td><td>'+cada.categoria_nome+'</td><td>'+cada.situacao+'</td><td>'+cada.dtavencimento+'</td><td>'+cada.dtapagamento+'</td><td><button type="button" class="btn btn-default" name="edit"><i class="fa fa-edit"></i></button></td></tr>');
                 }
                 
                 if(cada.tipo === 'D'){
-                    $('#finan_lanc_modal_list_tb_desp tbody').append('<tr data-id="'+cada.id+'" style="background:'+background+'"><td>'+cada.id+'</td><td>'+cada.descricao+'</td><td>'+cada.valor+'</td><td>'+cada.categoria_nome+'</td><td>'+cada.situacao+'</td><td>'+cada.dtavencimento+'</td><td>'+cada.dtapagamento+'</td><td><button type="button" class="btn btn-default" name="edit"><i class="fa fa-edit"></i></button></td></tr>');
+                    $('#finan_lanc_modal_list_tb_desp tbody').append('<tr data-id="'+cada.id+'" style="background:'+background+'"><td>'+cada.id+'</td><td>'+cada.descricao+'</td><td data-tipo="currency">'+cada.valor+'</td><td>'+cada.categoria_nome+'</td><td>'+cada.situacao+'</td><td>'+cada.dtavencimento+'</td><td>'+cada.dtapagamento+'</td><td><button type="button" class="btn btn-default" name="edit"><i class="fa fa-edit"></i></button></td></tr>');
                 }
                 
             });
@@ -248,7 +251,7 @@ $(function () {
                 var situacao = cada.situacao=='A'?'Aberto':'Pago';
                 var tipo = cada.tipo=='R'?'Receita':'Despesa';
                 
-                $('#finan_lanc_modal_list_tb_resumo_cat tbody').append('<tr><td>'+cada.nome+'</td><td>'+tipo+'</td><td>'+situacao+'</td><td>'+cada.total+'</td></tr>');
+                $('#finan_lanc_modal_list_tb_resumo_cat tbody').append('<tr><td>'+cada.nome+'</td><td>'+tipo+'</td><td>'+situacao+'</td><td data-tipo="currency">'+cada.total+'</td></tr>');
                 
             });
             
@@ -263,7 +266,6 @@ $(function () {
             
             $('#finan_lanc_modal_listagem').modal();
         
-            
             return false;
             
         });
@@ -311,7 +313,6 @@ $(function () {
     $('.btn-app[data-title=Financeiro]').click(function (){
         buscaCategorias();
     });
-
     
     /*SOBRE OS LANÇAMENTOS - FIM */
     
@@ -349,12 +350,5 @@ $(function () {
     });
     
     /*SOBRE OS LANÇAMENTOS MODAL - FIM */
-    
-
-
-
-
-    
-//    $('#finan_lanc_modal_listagem').modal();
 
 });
