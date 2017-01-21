@@ -28,11 +28,14 @@ class VFinanLancamentos extends Model {
     public function buscaLancamentosListagemResumo($data_inicio, $data_fim){
         
         $sql = "SELECT 
-            
-                    (select sum(valor) from {$this->tableName} where tipo='R' and dtainclusao between '$data_inicio' and '$data_fim' ) 'receita',
-                    (select sum(valor) from {$this->tableName} where tipo='D' and dtainclusao between '$data_inicio' and '$data_fim' ) 'despesa',
-                    ((select sum(valor) from {$this->tableName} where tipo='R' and dtainclusao between '$data_inicio' and '$data_fim')-(select sum(valor) from v_finan_lancamentos where tipo='D' and dtainclusao between '$data_inicio' and '$data_fim')) 'saldo',
-                    round((((select sum(valor) from {$this->tableName} where tipo='R' and dtainclusao between '$data_inicio' and '$data_fim')-(select sum(valor) from v_finan_lancamentos where tipo='D' and dtainclusao between '$data_inicio' and '$data_fim'))*10)/100,2) 'dizimo'
+                    (select sum(valor) from {$this->tableName} where tipo='R' and situacao='A' and dtainclusao between '$data_inicio' and '$data_fim') 'receita_receber',
+                    (select sum(valor) from {$this->tableName} where tipo='R' and situacao='P' and dtainclusao between '$data_inicio' and '$data_fim') 'receita_caixa',
+
+                    (select sum(valor) from {$this->tableName} where tipo='D' and situacao='A' and dtainclusao between '$data_inicio' and '$data_fim') 'despesa_pagar',
+                    (select sum(valor) from {$this->tableName} where tipo='D' and situacao='P' and dtainclusao between '$data_inicio' and '$data_fim') 'despesa_paga',
+
+                    ((select sum(valor) from {$this->tableName} where tipo='R' and situacao='P' and dtainclusao between '$data_inicio' and '$data_fim')- (select sum(valor) from {$this->tableName} where tipo='D' and situacao='P' and dtainclusao between '$data_inicio' and '$data_fim')) 'caixa_total',
+                    round((((select sum(valor) from {$this->tableName} where tipo='R' and situacao='P' and dtainclusao between '$data_inicio' and '$data_fim')- (select sum(valor) from {$this->tableName} where tipo='D' and situacao='P' and dtainclusao between '$data_inicio' and '$data_fim'))*10)/100,2) 'dizimo'
                     
                 FROM dual";
         

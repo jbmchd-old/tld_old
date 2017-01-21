@@ -7,7 +7,7 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
     .modal-lg {
         width: 1300px;
     }
-    
+
     .table button, .table button:hover {
         background: transparent;
         padding: 0;
@@ -15,7 +15,7 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
     }
 </style>
 
-<div id="finan_lanc_janela" class="janela col-lg-push-2 col-lg-7" style="display: none" data-title="Financeiro">
+<div id="finan_lanc_janela" class="janela col-lg-push-2 col-lg-7" style="display: non" data-title="Financeiro">
     <div class="divisao-janela">
         <form method="POST" action="" id="finan_lanc_form">
             <div class="modal-header">
@@ -27,9 +27,9 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
             <div class="modal-body clearfix" style="padding-bottom: 5px;">
 
                 <div id="finan_lanc_alertas" class="label label-default col-lg-12 hide"></div>
-                
+
                 <div class="col-lg-5" style="border-right: 1px solid #CCC">
-                    
+
                     <div>
                         <div class="form-group col-lg-10">
                             <label>Categoria *</label>
@@ -39,7 +39,7 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                             <button type="button" id="finan_lanc_addcat" class="btn btn-default" style="margin-top: 20px"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Descrição *</label>
@@ -52,11 +52,11 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                             <input type="radio" value="R" name="tipo" /> Receita
                         </div>
                     </div>
-                        
-                    
+
+
                     <div class="col-lg-12">
                         <label>Vencimento *</label><br>
-                        
+
                         <div class="form-group col-lg-6">
                             <label>Data</label>
                             <input class="form-control" id="finan_lanc_dtavencimento" readonly />
@@ -67,33 +67,33 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                             <input class="form-control" id="finan_lanc_valor" data-tipo="currency" data-obrigatorio />
                         </div>
                     </div>
-                    
+
                     <div class="form-group col-lg-12"> 
                         <input type="checkbox" value="S" id="finan_lanc_situacao" /> Pago
                     </div>
-                    
+
                     <div class="col-lg-12 finan_lanc_dtapagamento hide">
-                        
+
                         <div class="form-group col-lg-6">
                             <label>Data Pagamento</label>
                             <input class="form-control" id="finan_lanc_dtapagamento" data-tipo="currency" readonly />
                         </div>
 
                     </div>
-                    
+
                     <div class="col-lg-12 text-center" >
                         <button class="text-center btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Confirmar">
                             <i class="fa fa-check" style="color:#cc7a00"></i>
                         </button>
                     </div>
-                    
+
                 </div>
-                
+
                 <div class="col-lg-7" >
                     <div id="finan_lanc_lancamentos_alertas" class="label label-default col-lg-12 hide"></div>
                     <label>Lançamentos</label><br>
                     <div class="col-lg-12">
-                        
+
                         <div class="form-group col-lg-4">
                             <label>Início</label>
                             <input class="form-control" id="finan_lanc_pesq_inicio" readonly />
@@ -103,17 +103,17 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                             <label>Fim</label>
                             <input class="form-control" id="finan_lanc_pesq_fim" readonly />
                         </div>
-                        
+
                         <div class="col-lg-1">
                             <button type="button" class="btn btn-default" id="finan_lanc_pesquisar" style="margin-top: 20px"><i class="fa fa-search"></i></button>
                         </div>
-                        
+
                         <div class="col-lg-1">
                             <button type="button" class="btn btn-default" id="finan_lanc_listagem" style="margin-top: 20px"><i class="fa fa-arrows-alt"></i></button>
                         </div>
-                        
+
                     </div>
-                    
+
                     <div class="col-lg-12" style="/*min-height: 275px*/">
                         <table class="table table-bordered table-condensed table-striped" id="finan_lanc_tab_lanc">
                             <thead>
@@ -127,7 +127,7 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                         </table>
                     </div>
                 </div>
-                
+
             </div>
         </form>
     </div>
@@ -145,29 +145,29 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                 <div class="modal-body clearfix">
 
                     <div id="finan_lanc_modal_cat_alertas" class="label label-default col-lg-12 hide"></div>
-                    
+
                     <div class="form-group col-lg-12">
                         <label>Categoria *</label>
                         <select class="form-control" name="id" id="finan_lanc_modal_cat_id">
                             <option value="0">Nova...</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group col-lg-12">
                         <label>Nome *</label>
                         <input class="form-control col-lg-12" name="nome" id="finan_lanc_modal_cat_nome" data-obrigatorio />
                     </div>
-                    
+
                     <div class="col-lg-3" style="float: right">
                         <input type="checkbox" name="status" id="finan_lanc_modal_cat_status" checked /> Ativa
                     </div>
-                    
+
                     <div class="col-lg-12 text-center" >
                         <button class="text-center btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Confirmar">
                             <i class="fa fa-check" style="color:#cc7a00"></i>
                         </button>
                     </div>
-                    
+
                 </div>
             </form>
         </div>
@@ -186,15 +186,15 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                 <div class="modal-body clearfix">
 
                     <div id="finan_lanc_modal_alertas" class="label label-default col-lg-12 hide"></div>
-                    
-                    
+
+
                     <div>
                         <div class="form-group col-lg-12">
                             <label>Categoria *</label>
                             <select class="form-control" id="finan_lanc_modal_cat"></select>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Descrição *</label>
@@ -207,11 +207,11 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                             <input type="radio" value="R" name="tipo" /> Receita
                         </div>
                     </div>
-                        
-                    
+
+
                     <div class="col-lg-12">
                         <label>Vencimento *</label><br>
-                        
+
                         <div class="form-group col-lg-6">
                             <label>Data</label>
                             <input class="form-control" id="finan_lanc_modal_dtavencimento" readonly />
@@ -222,26 +222,26 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                             <input class="form-control" id="finan_lanc_modal_valor" data-obrigatorio />
                         </div>
                     </div>
-                    
+
                     <div class="form-group col-lg-12"> 
                         <input type="checkbox" value="S" id="finan_lanc_modal_situacao" /> Pago
                     </div>
-                    
+
                     <div class="col-lg-12 finan_lanc_modal_dtapagamento hide">
                         <div class="form-group col-lg-6">
                             <label>Data Pagamento</label>
                             <input class="form-control" id="finan_lanc_modal_dtapagamento" readonly />
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-12 text-center" >
                         <button class="text-center btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Confirmar">
                             <i class="fa fa-check" style="color:#cc7a00"></i>
                         </button>
                     </div>
-                    
+
                     <input type="hidden" id="finan_lanc_modal_id" />
-                    
+
                 </div>
             </form>
         </div>
@@ -250,9 +250,9 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
 
 <!-- Modal listagem completa -->
 <div class="modal fade" id="finan_lanc_modal_listagem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 1050">
-    <div class="modal-dialog" role="document" style="margin: 30px 12%">
+    <div class="modal-dialog" role="document" style="margin: 30px 5%">
         <div class="modal-content modal-lg">
-            <form id="finan_lanc_modal_cat_form">
+            <form id="finan_lanc_modal_list_form">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close "></i></button>
                     <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit "></i> Categorias</h4>
@@ -260,12 +260,20 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                 <div class="modal-body clearfix">
 
                     <div id="finan_lanc_modal_list_alertas" class="label label-default col-lg-12 hide"></div>
-                    
+
                     <div class="col-lg-12">
                         <label>Data início: </label> <span id="finan_lanc_modal_list_inicio"></span>
                         <label>Data fim: </label> <span id="finan_lanc_modal_list_fim"></span>
                     </div>
-                    
+
+                    <div class="col-lg-12" style="margin-bottom: 10px">
+                        <div class="col-lg-3">
+                            <label class="control-label" for="finan_lanc_modal_list_texto_filtro">Buscar</label>
+                            <input type="text" class="form-control" id="finan_lanc_modal_list_texto_filtro">
+                        </div>
+                        <button type="button" id="finan_lanc_modal_list_filtrar" class="btn btn-default" style="margin-top: 20px"><i class="fa fa-search"></i></button>
+                    </div>
+
                     <div class="col-lg-6" style="/*min-height: 275px*/">
                         <table class="table table-bordered table-condensed table-striped" id="finan_lanc_modal_list_tb_rec">
                             <thead>
@@ -307,30 +315,41 @@ $usuario = $this->sessao()->getArrayCopy('acesso')['storage'];
                             <tbody></tbody>
                         </table>
                     </div>
-
-                    <div class="col-lg-4" style="/*min-height: 275px*/">
-                        <table class="table table-bordered table-condensed table-striped" id="finan_lanc_modal_list_tb_resumo_cat">
-                            <thead>
-                                <tr>
-                                    <th colspan="4" class="col-lg-1">Categorias</th>
-                                </tr>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th class="col-lg-1">Tipo</th>
-                                    <th class="col-lg-1">Situação</th>
-                                    <th class="col-lg-1">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                    
+                    <div class="col-lg-12">
+                        <div class="col-lg-4" style="/*min-height: 275px*/">
+                            <table class="table table-bordered table-condensed table-striped" id="finan_lanc_modal_list_tb_resumo_cat">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" class="col-lg-1">Categorias</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th class="col-lg-1">Tipo</th>
+                                        <th class="col-lg-1">Situação</th>
+                                        <th class="col-lg-1">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    
+
                 </div>
                 <div class="modal-footer" style="padding: 6px 5px 0 0 ">
-                    <label>Total:</label> <span id="finan_lanc_modal_list_total_rec">15</span><span id="finan_lanc_modal_list_total_desp">11</span> = <span id="finan_lanc_modal_list_total_saldo">15</span> | 
-                    <label>Dizimo:</label> <span id="finan_lanc_modal_list_total_dizimo">10 </span>
-                    
+                        <label style="color: blue">RECEITAS: </label>
+                        <label>a receber:</label><span id="finan_lanc_modal_list_total_rec_receber"> R$ 1535.15</span> + 
+                        <label>caixa:</label><span id="finan_lanc_modal_list_total_rec_caixa"> R$ 5135.05</span> 
+                        <label>=</label><span id="finan_lanc_modal_list_total_rec"> R$ 5135.05</span> 
+                        | 
+                        <label style="color: red">DESPESAS: </label>
+                        <label>a pagar:</label><span id="finan_lanc_modal_list_total_desp_pagar"> R$ 1535.15</span> +
+                        <label>pagas:</label><span id="finan_lanc_modal_list_total_desp_paga"> R$ 1535.15</span>  
+                        <label>=</label><span id="finan_lanc_modal_list_total_desp"> R$ 1535.15</span>
+                        | 
+                        <label>CAIXA:</label> <span id="finan_lanc_modal_list_caixa_rec">15</span><span id="finan_lanc_modal_list_caixa_desp">11</span> = <span id="finan_lanc_modal_list_caixa_total">15</span> | 
+                        <label>Dízimo:</label> <span id="finan_lanc_modal_list_dizimo">10 </span>
                 </div>
             </form>
         </div>

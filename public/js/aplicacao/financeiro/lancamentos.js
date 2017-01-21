@@ -255,13 +255,23 @@ $(function () {
                 
             });
             
+            var rec_total = parseFloat(resumo.receita_receber)+parseFloat(resumo.receita_caixa);
+            var desp_total = parseFloat(resumo.despesa_pagar)+parseFloat(resumo.despesa_paga);
             var dizimo = resumo.dizimo>0?resumo.dizimo:0;
-            var cor_saldo = resumo.saldo>=0?'blue':'red';
+            var cor_saldo = resumo.caixa_total>=0?'blue':'red';
             
-            $('#finan_lanc_modal_list_total_rec').html('R$ '+resumo.receita).attr('style','color:blue');
-            $('#finan_lanc_modal_list_total_desp').html(' - R$ '+resumo.despesa).attr('style','color:red');
-            $('#finan_lanc_modal_list_total_saldo').html('R$ '+resumo.saldo).attr('style','color:'+cor_saldo);
-            $('#finan_lanc_modal_list_total_dizimo').html('R$ '+dizimo).attr('style','color:blue');
+            $('#finan_lanc_modal_list_total_rec_receber').html('R$ '+resumo.receita_receber);
+            $('#finan_lanc_modal_list_total_rec_caixa').html('R$ '+resumo.receita_caixa);
+            $('#finan_lanc_modal_list_total_rec').html('R$ '+rec_total.toFixed(2));
+            
+            $('#finan_lanc_modal_list_total_desp_pagar').html('R$ '+resumo.despesa_pagar);
+            $('#finan_lanc_modal_list_total_desp_paga').html('R$ '+resumo.despesa_paga);
+            $('#finan_lanc_modal_list_total_desp').html('R$ '+desp_total.toFixed(2));
+            
+            $('#finan_lanc_modal_list_caixa_rec').html('R$ '+resumo.receita_caixa).attr('style','color:blue');
+            $('#finan_lanc_modal_list_caixa_desp').html(' - R$ '+resumo.despesa_paga).attr('style','color:red');
+            $('#finan_lanc_modal_list_caixa_total').html('R$ '+resumo.caixa_total).attr('style','color:'+cor_saldo);
+            $('#finan_lanc_modal_list_dizimo').html('R$ '+dizimo).attr('style','color:blue');
             
             
             $('#finan_lanc_modal_listagem').modal();
@@ -307,6 +317,41 @@ $(function () {
         
         
         
+        return false;
+    });
+    
+    $('#finan_lanc_modal_list_filtrar').click(function (){
+        var text = $('#finan_lanc_modal_list_texto_filtro').val().trim();
+        
+        if(text===''){
+            $('#finan_lanc_modal_list_tb_rec tbody tr').show();
+            $('#finan_lanc_modal_list_tb_desp tbody tr').show();
+            return false;
+        }
+        
+        $('#finan_lanc_modal_list_tb_rec tbody td:nth-child(2)').each(function (i, cada){
+            var desc = $(cada).html().toLowerCase();
+            if(desc.indexOf(text)>=0){
+                $(this).parents('tr').show();
+            } else {
+                $(this).parents('tr').hide();
+            }
+        });
+        
+        $('#finan_lanc_modal_list_tb_desp tbody td:nth-child(2)').each(function (i, cada){
+            var desc = $(cada).html().toLowerCase();
+            if(desc.indexOf(text)>=0){
+                $(this).parents('tr').show();
+            } else {
+                $(this).parents('tr').hide();
+            }
+        });
+        
+        
+    });
+    
+    $('#finan_lanc_modal_list_form').submit(function (){
+        $('#finan_lanc_modal_list_filtrar').click();
         return false;
     });
     
