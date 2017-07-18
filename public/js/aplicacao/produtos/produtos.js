@@ -55,8 +55,9 @@ $(function () {
             var table = $('#prod_tabela tbody');
             table.html('');
             $(result).each(function (i, cada) {
+                var veic_marca = cada.veic_marca==null?'-':cada.veic_marca;
                 table
-                    .append('<tr data-id="'+cada.id+'" data-marca_id="'+cada.marca_id+'" data-veic_marca_id="'+cada.veic_marca_id+'"><td>'+cada.id+'</td><td>'+cada.marca+'</td><td>'+cada.veic_marca+'</td><td>'+cada.categoria+'</td><td>'+cada.codigoauxiliar+'</td><td>'+cada.descricao+'</td><td>'+cada.quantidade+'</td><td>'+cada.unidade+'</td><td>'+cada.espessura+'</td><td data-tipo="currency">'+cada.precocusto+'</td><td data-tipo="currency">'+cada.precovenda+'</td><td>'+cada.status+'</td><td>'+cada.obs+'</td><td style="text-align:center"><button type="button"><i class="fa fa-edit"></i></button></td></tr>');
+                    .append('<tr data-id="'+cada.id+'" data-marca_id="'+cada.marca_id+'" data-veic_marca_id="'+cada.veic_marca_id+'"><td>'+cada.id+'</td><td>'+cada.marca+'</td><td>'+veic_marca+'</td><td>'+cada.categoria+'</td><td>'+cada.codigoauxiliar+'</td><td>'+cada.descricao+'</td><td>'+cada.quantidade+'</td><td>'+cada.unidade+'</td><td>'+cada.espessura+'</td><td data-tipo="currency">'+cada.precocusto+'</td><td data-tipo="currency">'+cada.precovenda+'</td><td>'+cada.status+'</td><td>'+cada.obs+'</td><td style="text-align:center"><button type="button"><i class="fa fa-edit"></i></button></td></tr>');
             })
             
             $('.table').formatacao().tabela();
@@ -74,7 +75,7 @@ $(function () {
         });
     }
 
-    function salvar(id,marca_id,veic_marca_id,categoria,descricao,quantidade,unidade,espessura,precocusto,precovenda,obs,status) {
+    function salvar(id,marca_id,veic_marca_id,categoria,descricao,quantidade,unidade,espessura,precocusto,precovenda,obs,status,codigoauxiliar) {
         $.ajax({
             url: "/produtos/salvar",
             data: {
@@ -90,6 +91,7 @@ $(function () {
                 precovenda: precovenda,
                 obs: obs,
                 status: status,
+                codigoauxiliar:codigoauxiliar
             }
         }).done(function (result) {
             
@@ -141,8 +143,10 @@ $(function () {
         var precovenda = $('#prod_precovenda').val();
         var obs = $('#prod_obs').val();
         var status = ($('#prod_status').prop('checked')==true)?'A':'I';
+        var codigoauxiliar = $('#prod_codauxiliar').val();
         
-        salvar(null,marca_id,veic_marca_id,categoria,descricao,quantidade,unidade,espessura,precocusto,precovenda,obs,status);
+        
+        salvar(null,marca_id,veic_marca_id,categoria,descricao,quantidade,unidade,espessura,precocusto,precovenda,obs,status,codigoauxiliar);
 
         return false;
     });
@@ -207,8 +211,10 @@ $(function () {
         var precovenda = $('#modal_prod_precovenda').val();
         var obs = $('#modal_prod_obs').val();
         var status = ($('#modal_prod_status').prop('checked')==true)?'A':'I';
+        var codigoauxiliar = $('#modal_prod_codauxiliar').val();
         
-        salvar(id,marca_id,veic_marca_id,categoria,descricao,quantidade,unidade,espessura,precocusto,precovenda,obs,status);
+        
+        salvar(id,marca_id,veic_marca_id,categoria,descricao,quantidade,unidade,espessura,precocusto,precovenda,obs,status,codigoauxiliar);
         
         return false;
 

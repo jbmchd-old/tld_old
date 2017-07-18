@@ -55,7 +55,8 @@ $(function () {
     
     $("#pes_dta_nasc").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        yearRange: "-117:+0"
     });
 
     $('#pes-doc_tipo').change(function () {
